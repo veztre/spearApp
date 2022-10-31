@@ -8,23 +8,18 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Storage;
 
 class ActivityController extends Controller
 {
     public function index()
     {
-        
-        // $org_id=DB::table('organizations')
-        //        ->where('user_id',Auth::user()
-        //        ->id)->first();
-        // $activity=DB::table('activities')
-        //           ->where('organization_id',$org_id->id)
-        //           ->get(); 
 
-        $activities = Organization::where("user_id",Auth::user()->id)->first()->activities()->get();
+        if (Auth::user()->role=='student body'){
+            $activities = Activity::where("status", "for approval-student Body")->get();
+        }else if (Auth::user()->role=='student'){
+            $activities = Organization::where("user_id", Auth::user()->id)->first()->activities()->get();
+        }
         return Inertia::render('Activity/Index',[
             'activities' => $activities
         ]);
@@ -39,19 +34,19 @@ class ActivityController extends Controller
     {
         $org_id=Organization::where('user_id',Auth::user()->id)->first();
         Request::validate([
-            'venue' => 'required', 'max:50',
-            'purpose' => 'required', 'max:50',
-            'status' => 'required', 'max:50',
+            'venue' => 'required',
+            'purpose' => 'required',
+            'status' => 'required',
             'startDate' => 'required',
             'endDate' => 'required',
-            'attachment' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:2048',
+            'attachment' => 'required|mimetypes:application/pdf|max:2048',
 
         ]);
         // create pdf attachment
         $image_path = Request::file('attachment') ? Request::file('attachment')->store('PDF','public') : null;
 
         DB::table('activities')->insert([
-            'organization_id' => $org_id->id, 
+            'organization_id' => $org_id->id,
             'status' =>Request::get('status'),
             'venue' => Request::get('venue'),
             'purpose' => Request::get('purpose'),
@@ -65,8 +60,8 @@ class ActivityController extends Controller
 
     public function edit(Activity $activity)
     {
-        
-      
+
+
         return Inertia::render('Activity/Edit', [
             'activity' => [
                 'id' => $activity->id,
@@ -78,24 +73,24 @@ class ActivityController extends Controller
             ],
         ]);
     }
-  
+
     public function update(Activity $activity)
     {
         Request::validate([
             'venue' => ['required', 'max:50'],
-            'purpose' => ['required', 'max:50'],
+            'purpose' => ['required'],
             'startDate' => ['required' ],
             'endDate' => ['required'],
             'status' => ['required'],
-            'attachment' => 'image|mimes:jpeg,jpg,png,gif,svg|max:2048',
-   
-            
+            'attachment' => 'mimetypes:application/pdf|max:2048',
+
+
         ]);
         if (Request::file('attachment'))
         {
-            if ($activity->attachment!=null  )  
+            if ($activity->attachment!=null  )
                 Storage::delete(['public/', $activity->attachment]);
-            $image_path = Request::file('attachment')->store('PDF','public'); 
+            $image_path = Request::file('attachment')->store('PDF','public');
             Activity::where('id',Request::get('id'))
                 ->update([
                 'status' =>Request::get('status'),

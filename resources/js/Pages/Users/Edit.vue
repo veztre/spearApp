@@ -1,114 +1,115 @@
 <template>
-    <Head title="Users"/>
-  
-    <BreezeAuthenticatedLayout>
-    <template #header>
-      Users
-    </template>
-  
-    <div class="p-4 bg-white rounded-lg shadow-xs">
-      <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md">
-        <div class="flex justify-center items-center w-12 bg-blue-500">
-          <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"></path>
-          </svg>
-        </div>
-  
-        <div class="px-4 py-2 -mx-3">
-          <div class="mx-3">
-            <span class="font-semibold text-blue-500">Edit User</span>
-          </div>
-        </div>
-      </div>
+  <Head title="Users"/>
 
-      <div v-show="$page.props.flash.success"
-           class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
-        <div class="flex items-center justify-center w-12 bg-green-500">
-          <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
-            </path>
-          </svg>
-        </div>
-
-        <div class="px-4 py-2 -mx-3">
-          <div class="mx-3">
-            <span class="font-semibold text-green-500">Success</span>
-            <p class="text-sm text-gray-600">{{ $page.props.flash.success }}</p>
-          </div>
-        </div>
-      </div>
-
-      <BreezeValidationErrors class="mb-4"/>
-
-      <div class="overflow-hidden ma-8 w-full  bg-red-200 rounded-lg border shadow-xs">
-        <div class="overflow-x-auto  mx-8 w-3/4">
-            <form @submit.prevent="update">
-                   <BreezeLabel class="block w-1/2 mt-5" for="name" value="First Name"/>
-                    <BreezeInput
-                        id="name"
-                        v-model="form.first_name"
-                        type="text"
-                        class="block w-full my-5"
-                        
-                    />
-                    <BreezeLabel class="block w-1/2 mt-5" for="name" value="Last Name"/>
-                    <BreezeInput
-                        id="name"
-                        v-model="form.last_name"
-                        type="text"
-                        class="block w-full my-5"
-                        
-                    />
-                    <BreezeLabel for="role" value="Role"/>
-                    <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
-                        <option selected value="">Choose...</option>
-                        <option value="admin">Admin</option>
-                        <option value="dean">Dean Office</option>
-                        <option value="adviser">Adviser</option>
-                        <option value="student">Student</option>
-                    </select>
-                    <BreezeLabel for="email" value="Email"/>
-                    <BreezeInput
-                        type="email"
-                        v-model="form.email"
-                        class="block w-full my-5"
-                        required
-                    />
-                    <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
-                    <h1 class="text-3xl pb-4">Organization</h1> 
-
-                    <BreezeLabel for="name" value="Name"/>
-                    <BreezeInput
-                        type="text"
-                        v-model="form.name"
-                        class="block w-full my-5"
-                    />
-                    <BreezeLabel for="department" value="Department"/>
-                    <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
-                        <option selected value="">Choose...</option>
-                        <option value="Engineering">Engineering</option>
-                        <option value="Business">Business</option>
-                        <option value="IT">IT</option>
-                        <option value="Nursing">Nursing</option>
-                    </select>
-                    <Button class="mr-10 bg-red-500" tabindex="-1" type="button" @click="destroy">
-                      Delete Activity
-                    </Button>
-                    
-                    <Button class="block  my-5">
-                        Submit
-                    </Button>
-
-                </form>
-          </div>    
-        </div>
-    </div>
-    </BreezeAuthenticatedLayout>
+  <BreezeAuthenticatedLayout>
+  <template #header>
+    Users
   </template>
-  
-  <script>
+
+  <div class="p-4 bg-white rounded-lg shadow-xs">
+    <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md">
+      <div class="flex justify-center items-center w-12 bg-blue-500">
+        <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"></path>
+        </svg>
+      </div>
+
+      <div class="px-4 py-2 -mx-3">
+        <div class="mx-3">
+          <span class="font-semibold text-blue-500">Edit User</span>
+        </div>
+      </div>
+    </div>
+
+    <div v-show="$page.props.flash.success"
+         class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
+      <div class="flex items-center justify-center w-12 bg-green-500">
+        <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+          <path
+              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
+          </path>
+        </svg>
+      </div>
+
+      <div class="px-4 py-2 -mx-3">
+        <div class="mx-3">
+          <span class="font-semibold text-green-500">Success</span>
+          <p class="text-sm text-gray-600">{{ $page.props.flash.success }}</p>
+        </div>
+      </div>
+    </div>
+
+    <BreezeValidationErrors class="mb-4"/>
+
+    <div class="overflow-hidden ma-8 w-full  bg-red-200 rounded-lg border shadow-xs">
+      <div class="overflow-x-auto  mx-8 w-3/4">
+          <form @submit.prevent="update">
+                 <BreezeLabel class="block w-1/2 mt-5" for="name" value="First Name"/>
+                  <BreezeInput
+                      id="name"
+                      v-model="form.first_name"
+                      type="text"
+                      class="block w-full my-5"
+
+                  />
+                  <BreezeLabel class="block w-1/2 mt-5" for="name" value="Last Name"/>
+                  <BreezeInput
+                      id="name"
+                      v-model="form.last_name"
+                      type="text"
+                      class="block w-full my-5"
+
+                  />
+                  <BreezeLabel for="role" value="Role"/>
+                  <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
+                    <option :value='form.role'>{{form.role}} </option>
+                      <option value="chancellor">Chancellor</option>
+                      <option value="dean">Dean </option>
+                      <option value="adviser">Adviser</option>
+                      <option value="student">Student</option>
+                      <option value="student body">Student Body</option>
+                  </select>
+                  <BreezeLabel for="email" value="Email"/>
+                  <BreezeInput
+                      type="email"
+                      v-model="form.email"
+                      class="block w-full my-5"
+                      required
+                  />
+                  <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                  <h1 class="text-3xl pb-4">Organization</h1>
+
+                  <BreezeLabel for="name" value="Name"/>
+                  <BreezeInput
+                      type="text"
+                      v-model="form.name"
+                      class="block w-full my-5"
+                  />
+                  <BreezeLabel for="department" value="Department"/>
+                  <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
+                      <option selected value="">Choose...</option>
+                      <option value="Engineering">Engineering</option>
+                      <option value="Business">Business</option>
+                      <option value="IT">IT</option>
+                      <option value="Nursing">Nursing</option>
+                  </select>
+                  <Button class="mr-10 bg-red-500" tabindex="-1" type="button" @click="destroy">
+                    Delete User
+                  </Button>
+
+                  <Button class="block  my-5">
+                      Submit
+                  </Button>
+
+              </form>
+        </div>
+      </div>
+  </div>
+  </BreezeAuthenticatedLayout>
+</template>
+
+<script>
   import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
   import Pagination from '@/Components/Pagination.vue';
   import { Head } from '@inertiajs/inertia-vue3';
@@ -116,8 +117,8 @@
   import BreezeInput from '@/Components/Input.vue';
   import BreezeLabel from '@/Components/Label.vue';
   import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-  
-  
+
+
   export default {
     components: {
     BreezeAuthenticatedLayout,
@@ -128,7 +129,7 @@
     BreezeInput,
     BreezeLabel,
     Button
-    },  
+    },
     data() {
         return {
           form: this.$inertia.form({
@@ -143,7 +144,7 @@
             }),
         };
     },
-  
+
     props: {
       user: Object,
       organization:Object
@@ -151,16 +152,15 @@
       methods: {
      update() {
        this.form.put(`/users/${this.user.id}`, {
-       }) 
+       })
      },
      destroy() {
        if (confirm('Are you sure you want to delete this activity?')) {
          this.$inertia.delete(`/users/${this.user.id}`)
        }
      },
- 
+
     },
 
   }
   </script>
-  

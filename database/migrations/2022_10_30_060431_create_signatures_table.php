@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('organizations', function (Blueprint $table) {
+        Schema::create('signatures', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('name',100);
-            $table->string('logo', 150);
-            $table->string('department',90);
+            $table->integer('user_id',11)->nullable();
+            $table->string("sign_image",150);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('organizations');
+        Schema::dropIfExists('signatures');
     }
 };

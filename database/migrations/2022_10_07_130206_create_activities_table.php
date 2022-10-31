@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->integer('organization_id');
-            $table->string('purpose');
+            $table->text('purpose');
             $table->string('venue')->nullable();
-            $table->enum('status',['completed','for signature','approved','new','for revision']);
+            $table->enum('status',['new', 'for update', 'for approval-student Body', 'for approval- dean', 'for approval- chancellor', 'approved']);
             $table->dateTime('startDate');
             $table->dateTime('endDate');
             $table->string('attachment',150)->nullable();
             $table->timestamps();
-            
+
         });
     }
 
