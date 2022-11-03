@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('signatures', function (Blueprint $table) {
+        Schema::create('activity_signature', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
-            $table->string("sign_image",150);
+            $table->integer('activity_id')->unsigned();
+            $table->integer('signature_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signatures');
+        //
     }
 };

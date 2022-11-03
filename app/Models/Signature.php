@@ -15,15 +15,20 @@ class Signature extends Model
     ];
 
 
-        /**
-         * Get the user that owns the Signature
-         *
-         * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-         */
-        public function user()
-        {
-            return $this->belongsTo(User::class);
-        }
+    /**
+     * Get the user that owns the Signature
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class);
+    }
 
 
 }

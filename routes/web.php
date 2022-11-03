@@ -6,10 +6,10 @@ use Inertia\Inertia;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SignatureController;
-use App\Models\Signature;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,16 +52,24 @@ Route::middleware('auth')->group(function () {
     Route::get('activity/{activity}/edit', [ActivityController::class, 'edit'])->name('activity.edit');
     Route::put ('activity/{activity}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('activity/{activity}', [ActivityController::class, 'destroy'])->name('activity.destroy');
+    Route::get('activity/{activity}/viewAttachment', [ActivityController::class, 'viewAttachment']);
+    Route::get('activity/{activity}/approvedByOrg', [ActivityController::class, 'approvedByOrg']);
+
 
     //PDF
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
-    Route::get('activity/{activity}', [PDFController::class, 'generatePDF']);
+    Route::get('activity/{activity}/PDF', [PDFController::class, 'activityPDF']);
 
 
     //signature
     Route::get('createSignature', [SignatureController::class, 'create'])->name('signature.create');
     Route::post('saveSignature', [SignatureController::class, 'store'])->name('signature.store');
     Route::get('signature', [SignatureController::class, 'index'])->name('signature.index');
+
+    //comments
+    Route::get('activity/{activity}/addComment', [CommentController::class, 'create'])->name('comment.create');
+    Route::post('saveComment', [CommentController::class, 'store'])->name('comment.store');
+
 
 
 

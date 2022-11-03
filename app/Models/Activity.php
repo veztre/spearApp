@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    
+
      use HasFactory;
      protected $table='activities';
 
@@ -25,5 +25,15 @@ class Activity extends Model
      public function organization()
     {
         return $this->belongsTo(Organization::class);
+    }
+
+    public function signatures()
+    {
+        return $this->belongsToMany(Signature::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

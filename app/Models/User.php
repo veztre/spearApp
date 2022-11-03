@@ -52,4 +52,9 @@ class User extends Authenticatable
     public function signature(){
         return $this->hasOne(Signature::class);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

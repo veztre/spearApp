@@ -59,8 +59,9 @@
             <th class="px-4 py-3">Action</th>
           </tr>
           </thead>
-          <tbody class="bg-white divide-y">
-          <TableRow v-for="activity in activities" :key="activity.id" >
+          <tbody class="bg-white divide-y" >
+          <TableRow v-for="activity in activities" :key="activity.id">
+
             <TableData>
               {{ activity.purpose }}
             </TableData>
@@ -73,27 +74,100 @@
             <TableData >
               {{ activity.endDate }}
             </TableData>
-            <TableData >
+            <TableData>
+            <div v-if="`${activity.status}`=='for update'" class="text-red-600">
               {{ activity.status }}
+            </div>
+            <div v-else>
+                {{ activity.status }}
+            </div>
             </TableData>
             <TableData >
-              <Link v-if="($page.props.auth.user.role).toLowerCase() == 'student'" :href="`/activity/${activity.id}/edit`"
-              class="px-2 py-2 inline-block bg-blue-600 text-white
-                     text-xs leading-tight uppercase rounded shadow-md
-                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                    focus:outline-none focus:ring-0 active:bg-blue-800
-                    active:shadow-lg transition duration-150 ease-in-out">
+            <div v-if="(($page.props.auth.user.role).toLowerCase() == 'student' && `${activity.status}` == 'new') || `${activity.status}` == 'for update' " >
+                <Link :href="`/activity/${activity.id}/edit`"
+                class="px-2 py-2 inline-block bg-blue-600 text-white
+                        text-xs leading-tight uppercase rounded shadow-md
+                        hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                        focus:outline-none focus:ring-0 active:bg-blue-800
+                        active:shadow-lg transition duration-150 ease-in-out">
+                    View
+                </Link>
+                <Link v-if="`${activity.status}` == 'for update'" :href="`/activity/${activity.id}/viewComment`" class="mt-2 p-2 inline-block bg-blue-600 text-white
+                                    text-xs leading-tight uppercase rounded shadow-md
+                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                    active:shadow-lg transition duration-150 ease-in-out">
+                View Comment
+                </Link>
+            </div>
+
+            <div v-if="($page.props.auth.user.role).toLowerCase() == 'student body'" >
+
+                <a  :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                    text-xs leading-tight uppercase rounded shadow-md
+                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                    active:shadow-lg transition duration-150 ease-in-out">
                  View
-            </Link>
-            <Link v-if="($page.props.auth.user.role).toLowerCase() == 'student body'" :href="`/activity/${activity.id}`" class="px-2 py-2 inline-block bg-blue-600 text-white
-                                 text-xs leading-tight uppercase rounded shadow-md
-                                 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                focus:outline-none focus:ring-0 active:bg-blue-800
-                                active:shadow-lg transition duration-150 ease-in-out">
-            View
-            </Link>
+                </a>
+
+                <a :href="`/activity/${activity.id}/viewAttachment`"   class="p-2 m-2 inline-block bg-blue-600 text-white
+                                    text-xs leading-tight uppercase rounded shadow-md
+                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                    active:shadow-lg transition duration-150 ease-in-out">
+                 View Attachment
+                </a>
+                <a :href="`/activity/${activity.id}/addComment`"  class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                    text-xs leading-tight uppercase rounded shadow-md
+                                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                                    active:shadow-lg transition duration-150 ease-in-out">
+                    Comment
+                </a>
+                <a :href="`/activity/${activity.id}/approvedByOrg`" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                                    text-xs leading-tight uppercase rounded shadow-md
+                                                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                                                    active:shadow-lg transition duration-150 ease-in-out">
+                    Approved
+                </a>
+
+
+            </div>
+
+            <div v-if="($page.props.auth.user.role).toLowerCase() == 'dean'">
+
+                <a :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                text-xs leading-tight uppercase rounded shadow-md
+                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                active:shadow-lg transition duration-150 ease-in-out">
+                    View
+                </a>
+
+                <a :href="`/activity/${activity.id}/viewAttachment`" class="p-2 m-2 inline-block bg-blue-600 text-white
+                                                text-xs leading-tight uppercase rounded shadow-md
+                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                active:shadow-lg transition duration-150 ease-in-out">
+                    View Attachment
+                </a>
+                <a :href="`/activity/${activity.id}/approvedByDean`"
+                    class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                                                text-xs leading-tight uppercase rounded shadow-md
+                                                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                                                active:shadow-lg transition duration-150 ease-in-out">
+                    Approved
+                </a>
+
+
+            </div>
 
             </TableData>
+
+
           </TableRow>
           </tbody>
         </table>
@@ -130,6 +204,7 @@
 
     props: {
         activities: Object,
+        forUpdates: Object
 
     },
     methods: {

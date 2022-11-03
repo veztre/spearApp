@@ -60,11 +60,7 @@
                   <select name="status" v-model="form.status" class="block w-full rounded-lg" >
                     <option :value='form.status'>{{form.status}} </option>
                     <option value="new">New</option>
-                    <option value="for update">For Update</option>
                     <option value="for approval-student body">For Approval - Student Body</option>
-                    <option value="for approval-dean">For Approval - Dean</option>
-                    <option value="for approval-chancellor">For Approval - Chancellor</option>
-                    <option value="approved">Approved</option>
                   </select>
                   <BreezeLabel for="startDate "  value="Start Date"/>
                   <BreezeInput
@@ -119,7 +115,8 @@
             priority: props.activity.priority,
             endDate: props.activity.endDate,
             startDate: props.activity.startDate,
-            status:  props.activity.status,
+            status: props.activity.status,
+            attachment:props.activity.attachment
         })
   function update() {
         Inertia.post(`/activity/${props.activity.id}`, {

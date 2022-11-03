@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name',100);
-            $table->string('logo', 150);
+            $table->string('logo', 150)->nullable();
             $table->string('department',90);
             $table->timestamps();
         });
