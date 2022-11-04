@@ -40,10 +40,12 @@ class ActivityController extends Controller
             ]);
 
         }else{
-            $activities = Activity::all();
-            return Inertia::render('Activity/Index',[
-            'activities' => $activities
-        ]);
+            $activities = Activity::where("status", "for approval-chancellor")->get();
+            //$forUpdates = $activities->where('status', 'for update')->count();
+            return Inertia::render('Activity/Index', [
+                'activities' => $activities,
+            ]);
+
     }
     }
 
@@ -77,6 +79,7 @@ class ActivityController extends Controller
             'endDate' => Request::get('endDate'),
             'startDate' => Request::get('startDate'),
             'attachment'=> $image_path,
+            'updated_at'=> date("Y-m-d H:i:s"),
         ]);
 
         return redirect()->route('activity.index')->with('success', 'Activity  created.');
@@ -150,9 +153,11 @@ class ActivityController extends Controller
 
     public function approvedByOrg(Activity $activity){
 
-        Activity::where('id',$activity->id)
+
+            Activity::where('id', $activity->id)
             ->update([
-            'status' =>'for approval-dean']);
+                'status' => 'for approval-dean'
+            ]);
             $signature = Auth::user()->signature;
             $act_signature = Activity_Signature::where([
                 ['activity_id', '=', $activity->id],
@@ -166,7 +171,7 @@ class ActivityController extends Controller
                     ]
                 );
             }
-        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Chancellor\'s Office.');
+        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Dean\'s Office.');
 
     }
 
@@ -190,7 +195,7 @@ class ActivityController extends Controller
                 ]
             );
         }
-        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Dean\'s Office.');
+        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Chancellor\'s Office.');
     }
 
     public function approvedByChancellor(Activity $activity)

@@ -97,7 +97,6 @@
 
 <script setup>
   import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
- // import Pagination from '@/Components/Pagination.vue';
   import { Head } from '@inertiajs/inertia-vue3';
   import Button from '@/Components/SubmitButton.vue';
   import Input from '@/Components/Input.vue';

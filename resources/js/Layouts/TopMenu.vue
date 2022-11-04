@@ -7,11 +7,15 @@
             <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
           </svg>
         </button>
-          
+    <h3 class="text-lg mx-10 px-10 font-large leading-6 text-white "><i class="fa-solid fa-cart-shopping"></i> SPEAR: Student Organization's Portal for Enhanced Approval and
+    Registry </h3>
+
+
         <BreezeDropdown>
+
           <template #trigger>
             <button class="align-middle rounded-full text-white focus:shadow-outline-purple focus:outline-none" aria-label="Account" aria-haspopup="true">
-              {{ $page.props.auth.user.first_name }} {{ $page.props.auth.user.last_name }}
+            <i class="fa-solid fa-cart-shopping"></i>  {{ $page.props.auth.user.first_name }} {{ $page.props.auth.user.last_name }}
             </button>
           </template>
 

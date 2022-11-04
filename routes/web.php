@@ -8,6 +8,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SignatureController;
 
@@ -54,6 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('activity/{activity}', [ActivityController::class, 'destroy'])->name('activity.destroy');
     Route::get('activity/{activity}/viewAttachment', [ActivityController::class, 'viewAttachment']);
     Route::get('activity/{activity}/approvedByOrg', [ActivityController::class, 'approvedByOrg']);
+    Route::get('activity/{activity}/approvedByDean', [ActivityController::class, 'approvedByDean']);
+    Route::get('activity/{activity}/approvedByChancellor', [ActivityController::class, 'approvedByChancellor']);
 
 
     //PDF
@@ -69,6 +72,10 @@ Route::middleware('auth')->group(function () {
     //comments
     Route::get('activity/{activity}/addComment', [CommentController::class, 'create'])->name('comment.create');
     Route::post('saveComment', [CommentController::class, 'store'])->name('comment.store');
+
+    //organization
+    Route::get('organization', [OrganizationController::class, 'index'])->name('organization.index');
+    Route::put('organization/{organization}', [OrganizationController::class, 'create'])->name('organization.create');
 
 
 

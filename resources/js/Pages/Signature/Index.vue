@@ -22,7 +22,7 @@
                                     bg-green-500
                                     rounded
                                 " :href="route('signature.create')">
-                            Create
+                           Update
                             </Link>
                         </div>
                             <table class="w-full">

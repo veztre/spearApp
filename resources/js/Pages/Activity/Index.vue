@@ -83,14 +83,14 @@
             </div>
             </TableData>
             <TableData >
-            <div v-if="(($page.props.auth.user.role).toLowerCase() == 'student' && `${activity.status}` == 'new') || `${activity.status}` == 'for update' " >
+            <div v-if="(($page.props.auth.user.role).toLowerCase() == 'student' && `${activity.status}` == 'new') || `${activity.status}` == 'for update' || `${activity.status}` == 'approved' " >
                 <Link :href="`/activity/${activity.id}/edit`"
                 class="px-2 py-2 inline-block bg-blue-600 text-white
                         text-xs leading-tight uppercase rounded shadow-md
                         hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                         focus:outline-none focus:ring-0 active:bg-blue-800
                         active:shadow-lg transition duration-150 ease-in-out">
-                    View
+                    Edit
                 </Link>
                 <Link v-if="`${activity.status}` == 'for update'" :href="`/activity/${activity.id}/viewComment`" class="mt-2 p-2 inline-block bg-blue-600 text-white
                                     text-xs leading-tight uppercase rounded shadow-md
@@ -99,6 +99,13 @@
                                     active:shadow-lg transition duration-150 ease-in-out">
                 View Comment
                 </Link>
+                <a :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                    text-xs leading-tight uppercase rounded shadow-md
+                                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                                    active:shadow-lg transition duration-150 ease-in-out">
+                   View
+                </a>
             </div>
 
             <div v-if="($page.props.auth.user.role).toLowerCase() == 'student body'" >
@@ -159,6 +166,35 @@
                                                                                 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                                                                 focus:outline-none focus:ring-0 active:bg-blue-800
                                                                                 active:shadow-lg transition duration-150 ease-in-out">
+                    Approved
+                </a>
+
+
+            </div>
+
+            <div v-if="($page.props.auth.user.role).toLowerCase() == 'admin'">
+
+                <a :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                            text-xs leading-tight uppercase rounded shadow-md
+                                                            hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                            focus:outline-none focus:ring-0 active:bg-blue-800
+                                                            active:shadow-lg transition duration-150 ease-in-out">
+                    View
+                </a>
+
+                <a :href="`/activity/${activity.id}/viewAttachment`" class="p-2 m-2 inline-block bg-blue-600 text-white
+                                                            text-xs leading-tight uppercase rounded shadow-md
+                                                            hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                            focus:outline-none focus:ring-0 active:bg-blue-800
+                                                            active:shadow-lg transition duration-150 ease-in-out">
+                    View Attachment
+                </a>
+                <a :href="`/activity/${activity.id}/approvedByChancellor`"
+                    class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                                                            text-xs leading-tight uppercase rounded shadow-md
+                                                                                            hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                                                            focus:outline-none focus:ring-0 active:bg-blue-800
+                                                                                            active:shadow-lg transition duration-150 ease-in-out">
                     Approved
                 </a>
 

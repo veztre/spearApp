@@ -26,6 +26,26 @@ class PDFController extends Controller
 
     public function activityPDF(Activity $activity)
     {
+        //for actvity owner
+        $sign_owner= "";
+        $owner_firstname = "";
+        $owner_lastname = "";
+        $owner_role = "Position";
+        //for student leader
+        $sign_stud_body = "";
+        $stud_body_firstname = "";
+        $stud_body_lastname = "";
+        $stud_body_role = "Student Org Leader";
+        //for dean
+        $dean_sign = "";
+        $dean_firstname = "";
+        $dean_lastname = "";
+        $dean_role = "Dean";
+        //for chancellor
+        $chancellor_sign = "";
+        $chancellor_firstname = "";
+        $chancellor_lastname = "";
+        $chancellor_role = "Chancellor";
 
         $organization =$activity->organization;
         $signatures=$activity->signatures;
@@ -45,6 +65,20 @@ class PDFController extends Controller
                 $stud_body_lastname = $user->last_name;
                 $stud_body_role = $user->role;
             }
+            if ($user->role == 'dean') {
+                $dean_sign = $signature->sign_image;
+                $dean_firstname = $user->first_name;
+                $dean_lastname = $user->last_name;
+                $dean_role = $user->role;
+            }
+            if ($user->role == 'admin') {
+                $chancellor_sign = $signature->sign_image;
+                $chancellor_firstname = $user->first_name;
+                $chancellor_lastname = $user->last_name;
+                $chancellor_role = $user->role;
+            }
+
+
 
         }
         $data = [
@@ -54,6 +88,7 @@ class PDFController extends Controller
            'startDate' => $activity->startDate,
            'endDate' => $activity->endDate,
            'org_name' =>$organization->name,
+           'logo'=>$organization->logo,
            'department' => $organization->department,
            //for owner
            'sign_owner'=> $sign_owner,
@@ -64,10 +99,17 @@ class PDFController extends Controller
            'sign_stud_body' => $sign_stud_body,
            'stud_body_firstname' => $stud_body_firstname,
            'stud_body_lastname' => $stud_body_lastname,
-           'stud_body_role' => $stud_body_role
-
-
-
+           'stud_body_role' => $stud_body_role,
+            //for dean
+            'dean_sign'=>$dean_sign,
+            'dean_firstname'=>$dean_firstname,
+            'dean_lastname'=>$dean_lastname,
+            'dean_role'=>$dean_role,
+            //for chancellor
+            'chancellor_sign'=>$chancellor_sign,
+            'chancellor_firstname'=>$chancellor_firstname,
+            'chancellor_lastname'=>$chancellor_lastname,
+            'chancellor_role'=>$chancellor_role,
         ];
         // $pdf = PDF::loadView('PDF/myPDF',$data);
         // return $pdf->stream('activity.pdf');
