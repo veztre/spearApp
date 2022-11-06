@@ -21,32 +21,65 @@
                 <p class="text-sm text-gray-600">{{ $page.props.flash.success }}</p>
             </div>
         </div>
+
+    </div>
+    <div class="flex flex-row">
+        <div class="basis-1/3">
+
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <BarChart :chart-data="chartData" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="basis-1/3">
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                    <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <BarChart :chart-data="chartData" />
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="basis-1/3">
+            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <BarChart :chart-data="chartData" />
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
-     <div class="flex  flex-row  space-x-4">
-        <div class="">
-            <img class="max-w-full h-auto rounded-lg" src="/images/spear.png"  />
-        </div>
-        <div class="py-2">
-              <h1 class="text-2xl text-red-400 " > Spear Application </h1>
-              <p> for the student organizations at Batangas State University – Alangilan Campus. This is
-                  to assist the local student organizations in handling data processes of the
-                  administrative offices with a faster and more efficient platform. </p>
-        </div>
-    </div>
   </BreezeAuthenticatedLayout>
 </template>
 
-<script>
+<script setup>
 import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { Head } from '@inertiajs/inertia-vue3';
+import BarChart from '@/Pages/Chart/BarChart.vue'
+import { reactive } from 'vue'
 
-export default {
-  components: {
-    BreezeAuthenticatedLayout,
-    Head,
-  },
-};
+const props = defineProps({
+    chart: Object,
+    axis: Object,
+    activity_data: Object
+
+
+
+})
+
+const chartData = reactive({
+    labels: props.axis,
+    datasets: [{
+        label: 'Activity By Status',
+        backgroundColor: '#f87979',
+        data: props.activity_data,
+    }]
+
+})
+
 </script>

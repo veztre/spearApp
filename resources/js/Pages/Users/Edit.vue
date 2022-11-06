@@ -77,6 +77,7 @@
                       class="block w-full my-5"
                       required
                   />
+
                   <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
                   <h1 class="text-3xl pb-4">Organization</h1>
 
@@ -94,15 +95,11 @@
                       <option value="IT">IT</option>
                       <option value="Nursing">Nursing</option>
                   </select>
-                  <Button class="mr-10 bg-red-500" tabindex="-1" type="button" @click="destroy">
-                    Delete User
-                  </Button>
-
                   <Button class="block  my-5">
                       Submit
                   </Button>
 
-              </form>
+            </form>
         </div>
       </div>
   </div>
@@ -154,13 +151,7 @@
        this.form.put(`/users/${this.user.id}`, {
        })
      },
-     destroy() {
-       if (confirm('Are you sure you want to delete this activity?')) {
-         this.$inertia.delete(`/users/${this.user.id}`)
-       }
-     },
-
-    },
+   },
 
   }
   </script>

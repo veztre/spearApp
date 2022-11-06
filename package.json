@@ -20,6 +20,10 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
-        "font-awesome": "^4.7.0"
+        "@protonemedia/inertiajs-tables-laravel-query-builder": "^2.1.0",
+        "apexcharts": "^3.36.1",
+        "chart.js": "^3.9.1",
+        "font-awesome": "^4.7.0",
+        "vue-chartjs": "^4.1.2"
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Charts\MonthlyUsersChart;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,7 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SignatureController;
-
+use App\Http\Controllers\ChartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,22 +26,25 @@ use App\Http\Controllers\SignatureController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('about', function () {return Inertia::render('About');
+    Route::get('about', function () {
+        return Inertia::render('About');
     })->name('about');
     //  user
+
+
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('createuser', [UserController::class, 'create'])->name('users.create');
     Route::post('registeruser', [UserController::class, 'store'])->name('users.store');
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 
     //profile
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -51,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('createactivity', [ActivityController::class, 'create'])->name('activity.create');
     Route::post('saveActivity', [ActivityController::class, 'store'])->name('activity.store');
     Route::get('activity/{activity}/edit', [ActivityController::class, 'edit'])->name('activity.edit');
-    Route::put ('activity/{activity}', [ActivityController::class, 'update'])->name('activity.update');
+    Route::put('activity/{activity}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('activity/{activity}', [ActivityController::class, 'destroy'])->name('activity.destroy');
     Route::get('activity/{activity}/viewAttachment', [ActivityController::class, 'viewAttachment']);
     Route::get('activity/{activity}/approvedByOrg', [ActivityController::class, 'approvedByOrg']);
@@ -77,8 +81,7 @@ Route::middleware('auth')->group(function () {
     Route::get('organization', [OrganizationController::class, 'index'])->name('organization.index');
     Route::put('organization/{organization}', [OrganizationController::class, 'create'])->name('organization.create');
 
-
-
-
-
+    //chaaaart
+    Route::get('dashboard', [ChartController::class, 'index'])->name('dashboard');
 });
+require __DIR__ . '/auth.php';

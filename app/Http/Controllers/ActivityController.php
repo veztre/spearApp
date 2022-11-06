@@ -153,12 +153,13 @@ class ActivityController extends Controller
 
     public function approvedByOrg(Activity $activity){
 
+            $signature = Auth::user()->signature;
 
             Activity::where('id', $activity->id)
             ->update([
                 'status' => 'for approval-dean'
             ]);
-            $signature = Auth::user()->signature;
+
             $act_signature = Activity_Signature::where([
                 ['activity_id', '=', $activity->id],
                 ['signature_id', '=', $signature->id]
