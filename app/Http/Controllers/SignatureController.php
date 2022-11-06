@@ -49,7 +49,7 @@ class SignatureController extends Controller
      */
     public function store(StoreSignatureRequest $request)
     {
-        $sign_path = $request->file('sign_image') ? $request->file('sign_image')->store('Signature', 'public') : null;
+        $sign_path = $request->file('sign_image') ? $request->file('sign_image')->store('signature', 'public') : null;
         Signature::create([
             'sign_image' => $sign_path,
             'user_id' => (int) Auth::user()->id,
