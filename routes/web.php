@@ -13,6 +13,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +67,8 @@ Route::middleware('auth')->group(function () {
     //PDF
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     Route::get('activity/{activity}/PDF', [PDFController::class, 'activityPDF']);
+    Route::get('generate-activity-report/{status}/{startDate}/{endDate}', [PDFController::class, 'activityReport'])->name('generate-activity-report');
+
 
 
     //signature
@@ -83,5 +86,11 @@ Route::middleware('auth')->group(function () {
 
     //chaaaart
     Route::get('dashboard', [ChartController::class, 'index'])->name('dashboard');
+
+
+    //rep
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
+
+
 });
 require __DIR__ . '/auth.php';

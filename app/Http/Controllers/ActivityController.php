@@ -20,33 +20,36 @@ class ActivityController extends Controller
     public function index()
     {
 
+       $activities=Activity::latest('id')->paginate(3);
+       //$activities=Activity::all();
+       dd($activities);
+
         if (Auth::user()->role=='student body'){
             $activities = Activity::where("status", "for approval-student Body")->get();
-             return Inertia::render('Activity/Index',[
+             return Inertia::render('Activity/IndexStudentOrg',[
             'activities' => $activities
             ]);
         }else if (Auth::user()->role=='student'){
             $activities = Organization::where("user_id", Auth::user()->id)->first()->activities()->get();
-            $forUpdates = $activities->where('status','for update')->count();
+            //$forUpdates = $activities->where('status','for update')->count();
             return Inertia::render('Activity/Index', [
-                'activities' => $activities,
-                'forUpdates' => $forUpdates
+                'activities' => $activities
             ]);
+
         } else if (Auth::user()->role == 'dean') {
             $activities = Activity::where("status", "for approval-dean")->get();
             //$forUpdates = $activities->where('status', 'for update')->count();
-            return Inertia::render('Activity/Index', [
+            return Inertia::render('Activity/IndexDean', [
                 'activities' => $activities,
             ]);
 
         }else{
             $activities = Activity::where("status", "for approval-chancellor")->get();
             //$forUpdates = $activities->where('status', 'for update')->count();
-            return Inertia::render('Activity/Index', [
+            return Inertia::render('Activity/IndexChancellor', [
                 'activities' => $activities,
             ]);
-
-    }
+        }
     }
 
 
@@ -113,27 +116,29 @@ class ActivityController extends Controller
             'status' => ['required'],
             'attachment' => 'mimetypes:application/pdf|max:2048',
         ]);
+
+        if (Request::get('status')=='for approval-student body'){
+            $signature = Auth::user()->signature;
+            if ($signature == null) {
+                return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+            }
         if (Request::file('attachment'))
         {
             if ($activity->attachment!=null  )
-                Storage::delete(['public/', $activity->attachment]);
-            $image_path = Request::file('attachment')->store('public');
-            Activity::where('id',Request::get('id'))
+                Storage::delete([$activity->attachment]);
+                $attachment_path = Request::file('attachment')->store('public');
+                Activity::where('id',Request::get('id'))
                 ->update([
                 'status' =>Request::get('status'),
                 'venue' => Request::get('venue'),
                 'purpose' => Request::get('purpose'),
                 'endDate' => Request::get('endDate'),
                 'startDate' => Request::get('startDate'),
-                'attachment' =>$image_path]);
+                'attachment' =>$attachment_path]);
         }else
             $activity->update(Request::only('venue', 'purpose', 'status', 'startDate', 'endDate'));
-
-        if (Request::get('status')=='for approval-student body'){
-            $signature = Auth::user()->signature;
             $act_signature = Activity_Signature::where([['activity_id','=',Request::get('id')],
             ['signature_id','=',$signature->id]])->first();
-
             if ($act_signature==null){
                 DB::table('activity_signature')->insert(
                     [
@@ -142,18 +147,18 @@ class ActivityController extends Controller
                     ]
                 );
             }
-
-
         }
-
-
-     return redirect()->route('activity.index')->with('success', 'Activity  updated.');;
+      return redirect()->route('activity.index')->with('success', 'Activity  updated.');
     }
 
 
     public function approvedByOrg(Activity $activity){
 
             $signature = Auth::user()->signature;
+
+            if ($signature==null){
+            return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+            }
 
             Activity::where('id', $activity->id)
             ->update([
@@ -178,12 +183,16 @@ class ActivityController extends Controller
 
     public function approvedByDean(Activity $activity)
     {
+        $signature = Auth::user()->signature;
+        if ($signature == null) {
+            return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+        }
 
         Activity::where('id', $activity->id)
             ->update([
                 'status' => 'for approval-chancellor'
             ]);
-        $signature = Auth::user()->signature;
+
         $act_signature = Activity_Signature::where([
             ['activity_id', '=', Request::get('id')],
             ['signature_id', '=', $signature->id]
@@ -202,11 +211,16 @@ class ActivityController extends Controller
     public function approvedByChancellor(Activity $activity)
     {
 
+
+        $signature = Auth::user()->signature;
+        if ($signature == null) {
+            return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+        }
+
         Activity::where('id', $activity->id)
             ->update([
                 'status' => 'approved'
             ]);
-        $signature = Auth::user()->signature;
         $act_signature = Activity_Signature::where([
             ['activity_id', '=', Request::get('id')],
             ['signature_id', '=', $signature->id]

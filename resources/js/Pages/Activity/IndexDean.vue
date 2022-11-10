@@ -36,11 +36,6 @@
 
       <div class="px-4 py-2 -mx-3">
         <div class="mx-3">
-          <span v-if="($page.props.auth.user.role).toLowerCase() == 'student'" class="font-semibold text-blue-500">
-              <BreezeNavLink :href="route('activity.create')">
-               Create Activity
-              </BreezeNavLink>
-          </span>
            <p class="text-sm text-gray-600 text-right">activity List</p>
         </div>
       </div>
@@ -83,45 +78,46 @@
             </div>
             </TableData>
             <TableData >
-               <Link v-if="`${activity.status}` == 'for update' || `${activity.status}` == 'new' "  :href="`/activity/${activity.id}/edit`"
-                                class="mr-2 px-2 py-2 inline-block bg-blue-600 text-white
-                                    text-xs leading-tight uppercase rounded shadow-md
-                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                    focus:outline-none focus:ring-0 active:bg-blue-800
-                                    active:shadow-lg transition duration-150 ease-in-out">
-                    Edit
-                </Link>
-                <Link v-if="`${activity.status}` == 'for update'" :href="`/activity/${activity.id}/viewComment`"
-                                class="mr-2 p-2 inline-block bg-blue-600 text-white
-                                    text-xs leading-tight uppercase rounded shadow-md
-                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                    focus:outline-none focus:ring-0 active:bg-blue-800
-                                    active:shadow-lg transition duration-150 ease-in-out">
-                View Comment
-                </Link>
-                <a :href="`/activity/${activity.id}/PDF`" target="_blank"
-                                class="px-2 py-2 inline-block bg-blue-600 text-white
-                                      text-xs leading-tight uppercase rounded shadow-md
-                                      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                      focus:outline-none focus:ring-0 active:bg-blue-800
-                                      active:shadow-lg transition duration-150 ease-in-out">
-                   View
+                <a :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                text-xs leading-tight uppercase rounded shadow-md
+                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                active:shadow-lg transition duration-150 ease-in-out">
+                    View
+                </a>
+
+                <a :href="`/activity/${activity.id}/viewAttachment`" class="p-2 m-2 inline-block bg-blue-600 text-white
+                                                text-xs leading-tight uppercase rounded shadow-md
+                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                active:shadow-lg transition duration-150 ease-in-out">
+                    View Attachment
+                </a>
+                <a :href="`/activity/${activity.id}/approvedByDean`"
+                    class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                                                text-xs leading-tight uppercase rounded shadow-md
+                                                                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                                                                active:shadow-lg transition duration-150 ease-in-out">
+                    Approved
                 </a>
             </TableData>
+
+
           </TableRow>
           </tbody>
         </table>
       </div>
       <div
-        class="px-4 py-3 text-xs font-semibold TableRowacking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-
+          class="px-4 py-3 text-xs font-semibold TableRowacking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
+        <pagination class="mt-6" :links="activities.links" />
       </div>
     </div>
   </div>
   </BreezeAuthenticatedLayout>
 </template>
 
-<script setup>
+<script>
   import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
   import Pagination from '@/Components/Pagination.vue';
   import { Head, Link } from '@inertiajs/inertia-vue3';
@@ -129,10 +125,28 @@
   import BreezeNavLink from '@/Components/NavLink.vue'
   import TableRow from '../../Components/TableRow.vue'
   import TableData from '@/Components/TableData.vue';
-  import { defineProps } from 'vue';
 
-defineProps({
-    activities: Object
-   })
+  export default {
+    components: {
+    BreezeAuthenticatedLayout,
+    Pagination,
+    Head,
+    BreezeNavLink,
+    Button,
+    TableRow,
+    TableData,
+    Link
+},
 
+    props: {
+        activities: Object,
+        forUpdates: Object
+
+    },
+    methods: {
+
+    }
+
+
+  }
   </script>

@@ -5,24 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Activity;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
-
-
 use Illuminate\Http\Request;
 
 class PDFController extends Controller
 {
-
-    public function generatePDF(){
-    $data = [
-        'title' => 'Welcome to ItSolutionStuff.com',
-        'date' => date('m/d/Y')
-    ];
-    $pdf = PDF::loadView('PDF/myPDF', $data);
-
-    return $pdf->download('itsolutionstuff.pdf');
-
-   }
-
 
     public function activityPDF(Activity $activity)
     {
@@ -113,7 +99,27 @@ class PDFController extends Controller
         ];
         // $pdf = PDF::loadView('PDF/myPDF',$data);
         // return $pdf->stream('activity.pdf');
+
         return view('PDF/myPDF',$data);
+    }
+
+    public function activityReport(Request $request)
+    {
+
+            if ($request->status=='all'){
+                $data = Activity::all();
+                $status = "All Activity Status ";
+            }else{
+                $data = Activity::where('status', '=', $request->status)->get();
+                $status = $request->status + " Status";
+            }
+            $activities = $data->toArray();
+            $pdf = PDF::loadView('PDF/activity', ['activities' => $activities,'status'=>$status]);
+            return $pdf->download('activity.pdf');
+            return view('PDF/activity');
+
+
+
     }
 
 }
