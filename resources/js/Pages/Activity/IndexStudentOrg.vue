@@ -121,7 +121,7 @@
       </div>
       <div
         class="px-4 py-3 text-xs font-semibold TableRowacking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-        <pagination class="mt-6" :links="activities.links" />
+      
       </div>
     </div>
   </div>
