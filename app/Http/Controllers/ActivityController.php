@@ -20,9 +20,9 @@ class ActivityController extends Controller
     public function index()
     {
 
-       $activities=Activity::latest('id')->paginate(3);
+       //$activities=Activity::latest('id')->paginate(3);
        //$activities=Activity::all();
-       dd($activities);
+
 
         if (Auth::user()->role=='student body'){
             $activities = Activity::where("status", "for approval-student Body")->get();
