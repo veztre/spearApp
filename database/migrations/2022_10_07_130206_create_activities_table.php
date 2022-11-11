@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('organization_id');
             $table->text('purpose');
             $table->string('venue')->nullable();
-            $table->enum('status',['new', 'for update', 'for approval-student Body', 'for approval- dean', 'for approval- chancellor', 'approved']);
+            $table->string('status',50)->nullable();
             $table->dateTime('startDate');
             $table->dateTime('endDate');
             $table->string('attachment',150)->nullable();
