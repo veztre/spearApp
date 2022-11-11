@@ -111,7 +111,8 @@ class PDFController extends Controller
                 $status = "All Activity Status ";
             }else{
                 $data = Activity::where('status', '=', $request->status)->get();
-                $status = $request->status + " Status";
+                $status = strtoupper($request->status) . " Status";
+
             }
             $activities = $data->toArray();
             $pdf = PDF::loadView('PDF/activity', ['activities' => $activities,'status'=>$status]);
