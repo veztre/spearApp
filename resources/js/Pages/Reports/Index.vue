@@ -14,16 +14,10 @@
 
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <h3 class="text-2xl text-center">Generate PDF Report</h3>
-                        <div class="overflow-x-auto  my-8 ">
-                             <div class="flex mx-5" >
-                                <Label for="startDate " value="Start Date" class="w-1/8   rounded-lg"/>
-                                <Input type="datetime-local" class="w-1/8   rounded-lg" v-model="startDate" />
-                                <Label for="endDate " value="End Date" class="w-1/8   rounded-lg"/>
-                                <Input type="datetime-local" class="w-1/8   rounded-lg" v-model="endDate"  />
-                             </div>
-                            <div class="flex mx-5">
-                                <Label for="status" value="Status" class="w-1/4"  />
-                                <select v-model="status" class="w-1/8 mt-5  rounded-lg">
+                        <div class="overflow-x-auto  my-3 ">
+                             <div class="flex ">
+                                <Label for="status" value="Status" class=" ml-5 w-1/6"  />
+                                <select v-model="status" class="w-1/6  rounded-lg">
                                     <option value="all">All</option>
                                     <option value="new">New</option>
                                     <option value="for update">for update</option>
@@ -32,14 +26,14 @@
                                     <option value="for approval-chancellor">For Approval-chancellor</option>
                                 </select>
 
-                            <a :href="'/generate-activity-report/' + status + '/' + startDate + '/' + endDate "
-                            target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
-                                                                  text-xs leading-tight uppercase rounded shadow-md
-                                                                  hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                                                  focus:outline-none focus:ring-0 active:bg-blue-800
-                                                                  active:shadow-lg transition duration-150 ease-in-out">
-                                View
-                            </a>
+                                <a :href="'/generate-activity-report/' + status + '/' + startDate + '/' + endDate "
+                                target="_blank" class=" ml-2 px-2 py-2 inline-block bg-blue-600 text-white
+                                                                    text-xs leading-tight uppercase rounded shadow-md
+                                                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                                                    active:shadow-lg transition duration-150 ease-in-out">
+                                    Generate
+                                </a>
 
                             </div>
 
