@@ -24,8 +24,7 @@
 
     </div>
     <div class="flex flex-row">
-        <div class="basis-1/3">
-
+        <div class="basis-1/2">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
@@ -34,24 +33,16 @@
                 </div>
             </div>
         </div>
-        <div class="basis-1/3">
+        <div class="basis-1/2">
             <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
                     <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div class="p-6 bg-white border-b border-gray-200">
-                            <BarChart :chart-data="chartData" />
+                            <BarChart :chart-data="monthData" />
                         </div>
                     </div>
             </div>
         </div>
-        <div class="basis-1/3">
-            <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-                <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <BarChart :chart-data="chartData" />
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 
   </BreezeAuthenticatedLayout>
@@ -66,7 +57,10 @@ import { reactive } from 'vue'
 const props = defineProps({
     chart: Object,
     axis: Object,
-    activity_data: Object
+    activity_data: Object,
+    number_activities: Object,
+    months: Object
+
 
 
 
@@ -76,8 +70,18 @@ const chartData = reactive({
     labels: props.axis,
     datasets: [{
         label: 'Activity By Status',
-        backgroundColor: '#f87979',
+        backgroundColor: '#0000FB',
         data: props.activity_data,
+    }]
+
+})
+
+const monthData = reactive({
+    labels: props.months,
+    datasets: [{
+        label: 'Activity Per Month',
+        backgroundColor: '#f87979',
+        data: props.number_activities,
     }]
 
 })
