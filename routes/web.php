@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
     //PDF
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
     Route::get('activity/{activity}/PDF', [PDFController::class, 'activityPDF']);
-    Route::get('generate-activity-report/{status}/{startDate}/{endDate}', [PDFController::class, 'activityReport'])->name('generate-activity-report');
+    Route::get('generate-activity-report/{status}', [PDFController::class, 'activityReport'])->name('generate-activity-report');
 
 
 

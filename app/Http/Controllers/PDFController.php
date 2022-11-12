@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PDFController extends Controller
 {
@@ -106,7 +107,11 @@ class PDFController extends Controller
     public function activityReport(Request $request)
     {
 
-            if ($request->status=='all'){
+        $organization= Auth::user()->organization;
+        //dd($organization);
+
+
+        if ($request->status=='all' || $request->status=='null'){
                 $data = Activity::all();
                 $status = "All Activity Status ";
             }else{
@@ -115,9 +120,9 @@ class PDFController extends Controller
 
             }
             $activities = $data->toArray();
-            $pdf = PDF::loadView('PDF/activity', ['activities' => $activities,'status'=>$status]);
-            return $pdf->download('activity.pdf');
-            return view('PDF/activity');
+           $pdf = PDF::loadView('PDF/activity', ['activities' => $activities,'status'=>$status,'organization'=>$organization]);
+           return $pdf->download('activity.pdf');
+            // return view('PDF/activity', ['activities' => $activities, 'status' => $status, 'organization' => $organization]);
 
 
 

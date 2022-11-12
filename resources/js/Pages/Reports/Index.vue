@@ -18,7 +18,7 @@
                              <div class="flex ">
                                 <Label for="status" value="Status" class=" ml-5 w-1/6"  />
                                 <select v-model="status" class="w-1/6  rounded-lg">
-                                    <option value="all">All</option>
+                                    <option selected value="all">All</option>
                                     <option value="new">New</option>
                                     <option value="for update">for update</option>
                                     <option value="for approval-student body">For Approval-Student Body</option>
@@ -26,7 +26,7 @@
                                     <option value="for approval-chancellor">For Approval-chancellor</option>
                                 </select>
 
-                                <a :href="'/generate-activity-report/' + status + '/' + startDate + '/' + endDate "
+                                <a :href="'/generate-activity-report/' + status "
                                 target="_blank" class=" ml-2 px-2 py-2 inline-block bg-blue-600 text-white
                                                                     text-xs leading-tight uppercase rounded shadow-md
                                                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
@@ -64,18 +64,7 @@ import { ref, reactive } from 'vue'
 
 defineProps(["activities"])
 
-const status = ref("");
-const startDate = ref(null);
-const endDate = ref(null);
-
-
-
+const status = ref("null");
 const activity = ref(Object)
-
-function goto(status){
-
-  console.log(status)
-
-}
 
 </script>

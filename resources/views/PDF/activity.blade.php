@@ -51,22 +51,42 @@
 
 <body>
     <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="{{url('/storage/'.$organization->logo)}}" alt="" width="100px" height="100px">
+                <!-- <img src="/images/BSU.png" alt="" width="100px" height="100px"> -->
 
+            </div>
+            <div style="margin-left:11px;">
+                <p style="font-size:25px;">{{$organization->name}}</p>
+                <p style="font-size:15px;">Department: {{$organization->department}}</p>
+            </div>
+        </div>
         <hr />
         <h5 style="text-align:center; font-size:15px;"><b>ACTIVITY REPORT </b></h5>
         <h5 style="text-align:center; font-size:15px;"><b>{{$status}} </b></h5>
-        <br>
 
-        <table>
-            @foreach ($activities as $activity)
-            <tr>
-                <td style="padding-right:10px">{{$activity['venue']}}</td>
-                <td style="padding-right:10px">{{$activity['purpose']}}</td>
-                <td style="padding-right:10px">{{$activity['startDate']}}</td>
-                <td style="padding-right:10px">{{$activity['endDate']}}</td>
 
-            </tr>
-            @endforeach
+        <table style='border: 1px; '>
+            <thead>
+                <tr>
+                    <th> Venue</th>
+                    <th> Purpose</th>
+                    <th> Start Date</th>
+                    <th> End Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($activities as $activity)
+                <tr>
+                    <td style="padding-right:15px">{{$activity['venue']}}</td>
+                    <td style="padding-right:15px">{{$activity['purpose']}}</td>
+                    <td style="padding-right:15px">{{$activity['startDate']}}</td>
+                    <td style="padding-right:15px">{{$activity['endDate']}}</td>
+
+                </tr>
+                @endforeach
+            </tbody>
 
         </table>
     </div>
