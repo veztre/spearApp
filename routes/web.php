@@ -27,9 +27,9 @@ use App\Http\Controllers\ReportController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::put('organization/{organization}', [OrganizationController::class, 'create'])->name('organization.create');
 
     //chaaaart
-    Route::get('dashboard', [ChartController::class, 'index'])->name('dashboard');
+    Route::get('statistics', [ChartController::class, 'index'])->name('statistics');
 
 
     //rep

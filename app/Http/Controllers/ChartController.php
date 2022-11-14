@@ -24,7 +24,7 @@ class ChartController extends Controller
             $number_activities[] = $mon->num;
         }
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Statistics', [
             'axis' => $setAxis,
             'activity_data' => $setData,
             'months'=> $months,

@@ -120,7 +120,7 @@ class ActivityController extends Controller
         if (Request::get('status')=='for approval-student body'){
             $signature = Auth::user()->signature;
             if ($signature == null) {
-                return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+                return redirect()->route('activity.index')->with('error', 'Please Create Signature before approving an activity ');
             }
         if (Request::file('attachment'))
         {

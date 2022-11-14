@@ -1,6 +1,6 @@
 <template>
 
-    <Head title="Dashboard" />
+    <Head title="About Us" />
 
     <BreezeAuthenticatedLayout>
         <template #header>

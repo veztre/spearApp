@@ -39,7 +39,10 @@
                                             <Label for="name" value="Name"/>
                                                <Input  v-model="form.name"  type="text" />
                                             <Label for="department" value="Department" />
-                                               <Input type="text" v-model="form.department"  />
+                                            <Input type="text" v-model="form.department"  />
+
+
+                                            
                                             <label for="File">File Upload</label>
                                             <input type="file" @change="previewImage" @input="form.logo = $event.target.files[0]" class="
                                                                                     w-full

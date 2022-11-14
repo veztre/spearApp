@@ -22,7 +22,7 @@
       </div>
     </div>
     <div v-show="$page.props.flash.success"
-           class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
+        class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
         <div class="flex items-center justify-center w-12 bg-green-500">
           <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -81,7 +81,15 @@
                        </progress>
                   <hr/>
 
-                  <Button class="mr-10 bg-red-500" tabindex="-1" type="button" @click="destroy">
+                  <a type="button" class="text-white p-2 my-10 bg-blue-500 rounded shadow-md
+                                          hover:bg-blue-700 hover:shadow-lg"
+                    :href="`/activity/${form.id}/viewAttachment`">
+                         View Attachment
+                  </a>
+
+                  <Button class=" m-10 bg-red-500 rounded
+                                hover:bg-red-700 hover:shadow-lg"
+                     tabindex="-1" type="button" @click="destroy">
                     Delete Activity
                   </Button>
                   <Button>
@@ -102,7 +110,8 @@
   import BreezeLabel from '@/Components/Label.vue';
   import { ref,reactive } from 'vue'
   import { Inertia } from '@inertiajs/inertia'
-  import ValidationErrors from '@/Components/ValidationErrors.vue';
+import ValidationErrors from '@/Components/ValidationErrors.vue';
+  import SvgIcon from '@/Components/SvgIcon.vue';
 
    const props = defineProps({
       activity: Object
@@ -110,6 +119,7 @@
 
   const form= reactive({
             _method: 'put',
+            id:props.activity.id,
             purpose: props.activity.purpose,
             venue: props.activity.venue,
             priority: props.activity.priority,
