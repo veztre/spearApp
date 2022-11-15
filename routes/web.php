@@ -14,6 +14,8 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\SignatureController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,9 +29,9 @@ use App\Http\Controllers\ReportController;
 
 Route::get('/', [AuthenticatedSessionController::class, 'create']);
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',[DashboardController::class, 'index'])
+       ->middleware(['auth', 'verified'])
+       ->name('dashboard');
 
 
 

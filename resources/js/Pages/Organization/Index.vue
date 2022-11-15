@@ -39,10 +39,19 @@
                                             <Label for="name" value="Name"/>
                                                <Input  v-model="form.name"  type="text" />
                                             <Label for="department" value="Department" />
-                                            <Input type="text" v-model="form.department"  />
-
-
-                                            
+                                            <div class="mb-3 xl:w-96">
+                                                <select v-model="form.department"
+                                                        class="form-select appearance-none block w-full  px-3 py-1.5 text-base font-normal
+                                                        text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300
+                                                        rounded transition ease-in-out m-0
+                                                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
+                                                    <option selected :value='form.department'>{{form.department}} </option>
+                                                    <option value="College of Architecture, Fine Arts and Design">College of Architecture, Fine Arts and Design</option>
+                                                    <option value="CoE College of Engineering">CoE College of Engineering</option>
+                                                    <option value="University-wide Organizations">University-wide Organizations</option>
+                                                    <option value="College of Industrial Technology">College of Industrial Technology</option>
+                                                </select>
+                                            </div>
                                             <label for="File">File Upload</label>
                                             <input type="file" @change="previewImage" @input="form.logo = $event.target.files[0]" class="
                                                                                     w-full

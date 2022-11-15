@@ -33,7 +33,7 @@ class OrganizationController extends Controller
     public function create(Organization $organization)
     {
         Request::validate([
-            'name' => ['required', 'max:50'],
+            'name' => ['required'],
             'department' => ['required'],
             'logo' => 'mimes:svg,jpg,png|max:2048'
         ]);
