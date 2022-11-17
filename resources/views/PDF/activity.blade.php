@@ -53,14 +53,14 @@
     <div class="container">
         <div class="header">
             <div class="logo">
+                @if (!isset($organization))
+                <img src="/images/BSU.png" alt="" width="100px" height="100px">
+                @else
                 <img src="{{url('/storage/'.$organization->logo)}}" alt="" width="100px" height="100px">
-                <!-- <img src="/images/BSU.png" alt="" width="100px" height="100px"> -->
+                @endif
 
             </div>
-            <div style="margin-left:11px;">
-                <p style="font-size:25px;">{{$organization->name}}</p>
-                <p style="font-size:15px;">Department: {{$organization->department}}</p>
-            </div>
+
         </div>
         <hr />
         <h5 style="text-align:center; font-size:15px;"><b>ACTIVITY REPORT </b></h5>
