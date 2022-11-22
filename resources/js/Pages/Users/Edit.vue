@@ -64,37 +64,40 @@
                   <BreezeLabel for="role" value="Role"/>
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
                     <option :value='form.role'>{{form.role}} </option>
-                      <option value="chancellor">Chancellor</option>
-                      <option value="dean">Dean </option>
-                      <option value="adviser">Adviser</option>
-                      <option value="student">Student</option>
-                      <option value="student body">Student Body</option>
+                    <option selected value="president"> Org President</option>
+                    <option value="chancellor">Chancellor</option>
+                    <option value="dean">Dean </option>
                   </select>
+                  <div v-if="form.role=='' || form.role!='president'">
+                     <BreezeLabel for="Salutation" value="Salutation"/>
+                    <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
+                       <option :value='form.salutation'>{{form.salutation}} </option>
+                      <option selected value="Mr">Mr</option>
+                      <option selected value="Ms">Ms</option>
+                      <option value="Professor">Professor</option>
+                      <option value="Doctor">Doctor</option>
+                    </select>
+                 </div>
                   <BreezeLabel for="email" value="Email"/>
                   <BreezeInput
                       type="email"
                       v-model="form.email"
                       class="block w-full my-5"
                       required
+                      readonly
                   />
+                  <div v-if="form.role!='chancellor'">
+                    <BreezeLabel for="department" value="Department"/>
+                    <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
+                            <option :value='form.department'>{{form.department}} </option>
+                            <option value="College of Architecture, Fine Arts and Design">College of Architecture, Fine Arts and Design</option>
+                            <option value="CoE College of Engineering">CoE College of Engineering</option>
+                            <option value="University-wide Organizations">University-wide Organizations</option>
+                            <option value="College of Industrial Technology">College of Industrial Technology</option>
+                        </select>
+                  </div>
 
-                  <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
-                  <h1 class="text-3xl pb-4">Organization</h1>
 
-                  <BreezeLabel for="name" value="Name"/>
-                  <BreezeInput
-                      type="text"
-                      v-model="form.name"
-                      class="block w-full my-5"
-                  />
-                  <BreezeLabel for="department" value="Department"/>
-                  <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
-                      <option selected value="">Choose...</option>
-                      <option value="Engineering">Engineering</option>
-                      <option value="Business">Business</option>
-                      <option value="IT">IT</option>
-                      <option value="Nursing">Nursing</option>
-                  </select>
                   <Button class="block  my-5">
                       Submit
                   </Button>
@@ -135,16 +138,15 @@
                 last_name:this.user.last_name,
                 email: this.user.email,
                 role: this.user.role,
-                name: this.organization.name,
                 password:this.user.password,
-                department: this.organization.department
+                department: this.user.department,
+                salutation:this.user.salutation,
             }),
         };
     },
 
     props: {
       user: Object,
-      organization:Object
     },
       methods: {
      update() {

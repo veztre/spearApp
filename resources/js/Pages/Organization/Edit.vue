@@ -3,7 +3,7 @@
 
   <BreezeAuthenticatedLayout>
   <template #header>
-    Users
+    Organization Officer
   </template>
 
   <div class="p-4 bg-white rounded-lg shadow-xs">
@@ -17,7 +17,7 @@
 
       <div class="px-4 py-2 -mx-3">
         <div class="mx-3">
-          <span class="font-semibold text-blue-500">Create User</span>
+          <span class="font-semibold text-blue-500">Edit Officer</span>
         </div>
       </div>
     </div>
@@ -41,9 +41,10 @@
     </div>
 
     <BreezeValidationErrors class="mb-4"/>
+
     <div class="overflow-hidden ma-8 w-full  bg-red-200 rounded-lg border shadow-xs">
       <div class="overflow-x-auto  mx-8 w-3/4">
-              <form @submit.prevent="submit">
+          <form @submit.prevent="update">
                  <BreezeLabel class="block w-1/2 mt-5" for="name" value="First Name"/>
                   <BreezeInput
                       id="name"
@@ -62,34 +63,35 @@
                   />
                   <BreezeLabel for="role" value="Role"/>
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
-                      <option selected value="president"> Org President</option>
-                    <option selected value="officer">Officer</option>
-                      <option value="adviser">Adviser</option>
-                      <option value="chairperson">Chairperson</option>
+                    <option :value='form.role'>{{form.role}} </option>
+                    <option selected value="president"> Org President</option>
+                    <option value="chancellor">Chancellor</option>
+                    <option value="dean">Dean </option>
                   </select>
-
-                  <div v-if="form.role == '' || form.role != 'president' || form.role != 'officer'">
+                  <div v-if="form.role=='' || form.role!='president'">
                      <BreezeLabel for="Salutation" value="Salutation"/>
                     <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
+                       <option :value='form.salutation'>{{form.salutation}} </option>
                       <option selected value="Mr">Mr</option>
                       <option selected value="Ms">Ms</option>
                       <option value="Professor">Professor</option>
                       <option value="Doctor">Doctor</option>
                     </select>
-                  </div>
+                 </div>
                   <BreezeLabel for="email" value="Email"/>
                   <BreezeInput
                       type="email"
                       v-model="form.email"
                       class="block w-full my-5"
                       required
+                      readonly
                   />
-                    <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
-                 <Button class="block  my-5">
+
+                  <Button class="block  my-5">
                       Submit
                   </Button>
 
-              </form>
+            </form>
         </div>
       </div>
   </div>
@@ -106,7 +108,6 @@
   import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 
 
-
   export default {
     components: {
     BreezeAuthenticatedLayout,
@@ -120,27 +121,26 @@
     },
     data() {
         return {
-            form: this.$inertia.form({
-                first_name: "",
-                last_name:"",
-                email: "",
-                role:"",
-                name: "",
-                password:'password',
-                salutation:"",
+          form: this.$inertia.form({
+         _method: 'put',
+                first_name: this.user.first_name,
+                last_name:this.user.last_name,
+                email: this.user.email,
+                role: this.user.role,
+                salutation:this.user.salutation,
             }),
         };
     },
 
     props: {
-      users: Object,
+      user: Object,
     },
-
-    methods: {
-        submit() {
-            this.form.post(this.route("officers.store"));
-        },
-    },
+      methods: {
+     update() {
+       this.form.put(`/officers/${this.user.id}`, {
+       })
+     },
+   },
 
   }
   </script>

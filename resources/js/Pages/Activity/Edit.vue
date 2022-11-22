@@ -41,7 +41,7 @@
 
       <ValidationErrors class="mb-4"/>
 
-    <div class="overflow-hidden ma-8 w-1/2  bg-red-200 rounded-lg border shadow-xs">
+    <div class="overflow-hidden ma-8   bg-red-200 rounded-lg border shadow-xs">
       <div class="overflow-x-auto  mx-8 ">
               <form @submit.prevent="update">
                 <BreezeLabel for="name" value="Venue"/>

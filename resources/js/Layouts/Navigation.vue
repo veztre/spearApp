@@ -28,7 +28,8 @@
               User
           </BreezeNavLink>
         </li>
-        <li v-if="($page.props.auth.user.role).toLowerCase()=='student'" class="relative px-6 py-3">
+
+        <li v-if="($page.props.auth.user.role).toLowerCase()=='president'" class="relative px-6 py-3">
             <BreezeNavLink :href="route('organization.index')" :active="route().current('organization.index')">
                 <template #icon>
                    <SvgIcon>
@@ -37,6 +38,16 @@
                    </SvgIcon>
                   </template>
                 Organization
+            </BreezeNavLink>
+            <li class="relative px-6 py-3"></li>
+            <BreezeNavLink :href="route('users.officers')" :active="route().current('users.officers')">
+                <template #icon>
+                   <SvgIcon>
+                     <path stroke-linecap="round" stroke-linejoin="round"
+                         d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                   </SvgIcon>
+                  </template>
+                Officers
             </BreezeNavLink>
         </li>
         <li class="relative px-6 py-3">
@@ -51,7 +62,7 @@
           Activities
           </BreezeNavLink>
         </li>
-        <li class="relative px-6 py-3">
+        <li v-if="($page.props.auth.user.role).toLowerCase() !='president'" class="relative px-6 py-3">
             <BreezeNavLink :href="route('signature.index')" :active="route().current('signature.index')">
                 <template #icon>
                     <SvgIcon>
@@ -111,25 +122,9 @@
   </aside>
 </template>
 
-<script>
-import BreezeNavLink from '@/Components/NavLink.vue'
-import { Link } from '@inertiajs/inertia-vue3';
-import SvgIcon from '@/Components/SvgIcon.vue';
-import { ref } from 'vue'
-
-export default {
-  components: {
-    BreezeNavLink,
-        Link,
-    SvgIcon,
-  },
-
-  setup() {
-    let showingTwoLevelMenu = ref(false)
-
-    return {
-      showingTwoLevelMenu
-    }
-  },
-}
+<script setup>
+    import BreezeNavLink from '@/Components/NavLink.vue'
+    import { Link } from '@inertiajs/inertia-vue3';
+    import SvgIcon from '@/Components/SvgIcon.vue';
+    import { ref } from 'vue'
 </script>

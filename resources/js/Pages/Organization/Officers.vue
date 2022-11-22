@@ -3,7 +3,7 @@
 
   <BreezeAuthenticatedLayout>
   <template #header>
-   Activity
+   Organization's Officers
   </template>
 
 
@@ -27,16 +27,17 @@
       </div>
     </div>
     <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md">
-      <div class="px-4 py-4 -mx-3">
-        <div class="mx-3">
-          <span v-if="($page.props.auth.user.role).toLowerCase() == 'president'" class="font-semibold text-blue-500">
-              <Link class=" px-6 py-2 mb-2 text-green-100 bg-green-500 rounded"
-                    :href="route('activity.create')">
-                    Create Activity
-              </Link>
+          <span >
+             <a class=" inline-block bg-blue-600 text-white
+                                text-xs p-3 m-3 leading-tight uppercase rounded shadow-md
+                                hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                focus:outline-none focus:ring-0 active:bg-blue-800
+                                active:shadow-lg transition duration-150 ease-in-out" :href="route('officers.create')">
+                        Create Officers
+                    </a>
           </span>
-        </div>
-      </div>
+
+
     </div>
 
     <div class="overflow-hidden mb-8 w-full rounded-lg border shadow-xs">
@@ -44,39 +45,28 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
-            <th class="px-4 py-3">Purpose</th>
-            <th class="px-4 py-3">Venue</th>
-            <th class="px-4 py-3">Start</th>
-            <th class="px-4 py-3">End</th>
-            <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">Fistname</th>
+            <th class="px-4 py-3">Lastname</th>
+            <th class="px-4 py-3">Position</th>
             <th class="px-4 py-3">Action</th>
           </tr>
           </thead>
           <tbody class="bg-white divide-y" >
-          <TableRow v-for="activity in activities" :key="activity.id">
+          <TableRow v-for="user in users" :key="user.id">
 
             <TableData>
-              {{ activity.purpose }}
+              {{ user.first_name }}
             </TableData>
             <TableData >
-              {{ activity.venue }}
+              {{ user.last_name }}
             </TableData>
+
             <TableData >
-              {{ activity.startDate }}
+              {{ user.role}}
             </TableData>
+
             <TableData >
-              {{ activity.endDate }}
-            </TableData>
-            <TableData>
-            <div v-if="`${activity.status}`=='for update'" class="text-red-600">
-              {{ activity.status }}
-            </div>
-            <div v-else>
-                {{ activity.status }}
-            </div>
-            </TableData>
-            <TableData >
-               <Link v-if="`${activity.status}` == 'for update' || `${activity.status}` == 'new' "  :href="`/activity/${activity.id}/edit`"
+               <Link :href="`/officers/${user.id}/edit`"
                                 class="mr-2 px-2 py-2 inline-block bg-blue-600 text-white
                                     text-xs leading-tight uppercase rounded shadow-md
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
@@ -84,22 +74,15 @@
                                     active:shadow-lg transition duration-150 ease-in-out">
                     Edit
                 </Link>
-                <Link v-if="`${activity.status}` == 'for update'" :href="`/activity/${activity.id}/viewComment`"
+                <Link :href="`/officers/${user.id}/createSignature`"
                                 class="mr-2 p-2 inline-block bg-blue-600 text-white
                                     text-xs leading-tight uppercase rounded shadow-md
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                     focus:outline-none focus:ring-0 active:bg-blue-800
                                     active:shadow-lg transition duration-150 ease-in-out">
-                View Comment
+                    Signature
                 </Link>
-                <a :href="`/activity/${activity.id}/PDF`" target="_blank"
-                                class="px-2 py-2 inline-block bg-blue-600 text-white
-                                      text-xs leading-tight uppercase rounded shadow-md
-                                      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                      focus:outline-none focus:ring-0 active:bg-blue-800
-                                      active:shadow-lg transition duration-150 ease-in-out">
-                   View
-                </a>
+
             </TableData>
           </TableRow>
           </tbody>
@@ -119,12 +102,12 @@
   import Pagination from '@/Components/Pagination.vue';
   import { Head, Link } from '@inertiajs/inertia-vue3';
   import Button from '@/Components/SubmitButton.vue';
+  import BreezeNavLink from '@/Components/NavLink.vue'
   import TableRow from '../../Components/TableRow.vue'
   import TableData from '@/Components/TableData.vue';
-
+  import { defineProps } from 'vue';
 
 const props = defineProps({
-    activities: Object
-   })
-
-</script>
+    users: Object
+})
+  </script>

@@ -19,7 +19,6 @@ class SignatureController extends Controller
      */
     public function index()
     {
-
         $signature = Signature::where("user_id", Auth::user()->id)->first();
 
         if ($signature==null){
@@ -92,15 +91,12 @@ class SignatureController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Signature  $signature
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Signature $signature)
     {
-        //
+
+
+       // return Inertia::render('Signature/Create');
     }
 
     /**

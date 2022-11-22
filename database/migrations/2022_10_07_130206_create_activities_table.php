@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('organization_id');
             $table->text('purpose');
-            $table->string('venue')->nullable();
+            $table->string('venue',200)->nullable();
             $table->string('status',50)->nullable();
             $table->dateTime('startDate');
             $table->dateTime('endDate');

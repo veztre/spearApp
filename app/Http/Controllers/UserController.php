@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,23 +24,24 @@ class UserController extends Controller
                         $query
                            ->orWhere('first_name', 'LIKE', "%{$value}%")
                            ->orWhere('last_name', 'LIKE', "%{$value}%")
-                           ->orWhere('email', 'LIKE', "%{$value}%");
+                           ->orWhere('role', 'LIKE', "%{$value}%")
+                           ->orWhere('department', 'LIKE', "%{$value}%");
                     });
                 });
             });
             $users = QueryBuilder::for(User::class)
-            ->defaultSort('id')
-            ->allowedSorts(['first_name', 'email','id'])
-            ->allowedFilters(['first_name','last_name', 'email', $globalSearch])
+            ->defaultSort('first_name')
+            ->allowedSorts(['first_name', 'last_name','role','department'])
+            ->allowedFilters(['lastname_name','last_name', 'role','department', $globalSearch])
+
             ->paginate(8)
             ->withQueryString();
 
             return Inertia::render('Users/Index', ['users' => $users])->table(function (InertiaTable $table) {
-                $table->column('id', 'ID', searchable: true, sortable: true);
-                $table->column('first_name', 'User Name', searchable: true, sortable: true);
-                $table->column('first_name', 'User Name', searchable: true, sortable: true);
-                $table->column('email', 'Email Address', searchable: true, sortable: true);
-                $table->column('created_at', 'Join Date', searchable: true, sortable: false);
+                $table->column('first_name', 'First Name', searchable: true, sortable: true);
+                $table->column('last_name', 'Last Name', searchable: true, sortable: true);
+                $table->column('role', 'Role', searchable: true, sortable: true);
+                $table->column('department', 'Department', searchable: true, sortable: true);
                 $table->column(label: 'Actions');
             });
 
@@ -60,28 +62,48 @@ class UserController extends Controller
             'role' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required',
-            'name'=> 'required',
-            'department' => 'required'
             ]);
 
-        $organization = new Organization([
-                 'name'=>Request::get('name'),
-                 'department'=>Request::get('department'),
+
+        if (Request::get('role')=='president'){
+            $organization = new Organization([
+                'name' => "for update",
+                'acronym' => "FUD",
             ]);
-        User::create([
-            'last_name' => Request::get('last_name'),
-            'first_name' => Request::get('first_name'),
-            'email' => Request::get('email'),
-            'role' => Request::get('role'),
-            'password' => Hash::make(Request::get('password')),
-            ])->organization()->save($organization);
+            $organization->save();
+            $user= new User([
+                'last_name' => Request::get('last_name'),
+                'first_name' => Request::get('first_name'),
+                'email' => Request::get('email'),
+                'role' => Request::get('role'),
+                'department' => Request::get('department'),
+                'password' => Hash::make(Request::get('password')),
+                'salutation' => Request::get('salutation')
+            ]);
+            $user->save();
+
+           $organization->users()->attach($user);
+
+
+
+        }else{
+            User::create([
+                'last_name' => Request::get('last_name'),
+                'first_name' => Request::get('first_name'),
+                'email' => Request::get('email'),
+                'role' => Request::get('role'),
+                'department' => Request::get('department'),
+                'password' => Hash::make(Request::get('password')),
+                'salutation' => Request::get('salutation')]);
+        }
+
+
 
         return redirect()->route('users.index');;
     }
 
     public function edit(User $user)
     {
-        $organization=Organization::where('user_id',$user->id)->first();
 
             return Inertia::render('Users/Edit', [
                 'user' => [
@@ -90,13 +112,11 @@ class UserController extends Controller
                     'first_name' => $user->first_name,
                     'role' => $user->role,
                     'email' => $user->email,
+                    'salutation' => $user->salutation,
+                    'department' => $user->department
                 ],
-                'organization'=> [
-                    'name'=>$organization->name,
-                    'department'=> $organization->department
-                ]
             ]);
-         
+
     }
 
     public function update(User $user)
@@ -105,17 +125,12 @@ class UserController extends Controller
             'last_name' => 'required|string|max:255',
             'first_name' => 'required|string|max:255',
             'role' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required',
-            'name'=> 'required',
-            'department' => 'required'
+          //  'email' => 'required|string|email|max:255|unique:users',
+         //   'salutation'=> 'required',
+          //  'department' => 'required'
+
             ]);
-        $user->update(Request::only('last_name', 'first_name', 'role', 'email'));
-        DB::table('organizations')
-            ->where('user_id', $user->id)
-            ->update(['name' => Request::get('name'),
-                     'department' => Request::get('department')
-            ]);
+        $user->update(Request::only('last_name', 'first_name', 'role', 'salutation','department'));
         return redirect()->route('users.index')->with('success', 'user  updated');;
     }
 
@@ -129,6 +144,16 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User  Deleted.');
     }
+    public function officers()
+    {
+        $organization = User::find(Auth::user()->id)->organizations()->first();
+        //dd($organization->id);
+        $users= Organization::find($organization->id)->users()->get();
+        return Inertia::render('Organization/Officers', [
+            'users'=>$users,
+        ]);
+     }
+
 
 
 

@@ -70,8 +70,8 @@
         <i> Dear Sir/Madam </i>
         <br>
         <br>
-        The {{$org_name}} would like to request the use of the venue
-        for the Purpose of {{$purpose}}
+        The {{$org_name}} would like to request the use of the venue {{$venue}}
+        for the purpose of {{$purpose}}
         <br>
         from {{date_format(new DateTime($startDate),"F d Y g:i:s A")}} to {{date_format(new DateTime($endDate),"F d Y g:i:s A")}}
         <br> <br>
@@ -111,8 +111,39 @@
             </tr>
 
             <tr>
+                <td style="padding-right:150px"> Recommended By </td>
+                <td style="padding-left:150px"> Recommended By</td>
+            </tr>
+            <tr>
+                <td style="padding-right:150px">
+                    @if($sign_adviser!='')
+                    <img src="{{url('/storage/'.$sign_adviser)}}" height=50 width="100" alt="">
+                    @endif
+                </td>
+                <td style="padding-left:150px">
+                    @if($sign_chairperson!='')
+                    <img src="{{url('/storage/'.$sign_chairperson)}}" height=50 width="100" alt="">
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-right:150px">{{$adviser_firstname}} {{$adviser_lastname}}</td>
+                <td style="padding-left:150px">{{$chairperson_firstname}} {{$chairperson_lastname}}</td>
+            </tr>
+            <tr>
+                <td style="padding-right:150px">{{$adviser_role}}</td>
+                <td style="padding-left:150px">{{$chairperson_role}}</td>
+
+
+            </tr>
+
+
+            <tr>
+                <td style="padding:10px" colspan='2'> &nbsp;</td>
+            </tr>
+
+            <tr>
                 <td style=" padding-right:150px"> Recomended By</td>
-                <td style="padding-left:150px"> Recomended By </td>
             </tr>
             <tr>
                 <td style="padding-right:150px">
@@ -120,19 +151,12 @@
                     <img src="{{url('/storage/'.$dean_sign)}}" height=50 width="100" alt="">
                     @endif
                 </td>
-                <td style="padding-left:150px">
-                    @if($chancellor_sign!='')
-                    <img src="{{url('/storage/'.$chancellor_sign)}}" height=50 width="100" alt="">
-                    @endif
-                </td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$dean_firstname}} {{$dean_lastname}}</td>
-                <td style="padding-left:150px"> {{$chancellor_firstname}} {{$chancellor_lastname}}</td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$dean_role}}</td>
-                <td style="padding-left:150px">{{$chancellor_role}}</td>
             </tr>
             <tr>
                 <td style="padding:15px" colspan='2'> &nbsp;</td>

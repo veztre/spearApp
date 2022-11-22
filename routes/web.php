@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
     Route::delete('users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::get('officers', [UserController::class, 'officers'])->name('users.officers');
 
     //profile
     Route::get('profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -85,8 +86,15 @@ Route::middleware('auth')->group(function () {
     //organization
     Route::get('organization', [OrganizationController::class, 'index'])->name('organization.index');
     Route::put('organization/{organization}', [OrganizationController::class, 'create'])->name('organization.create');
+    Route::get('createofficer', [OrganizationController::class, 'createOfficer'])->name('officers.create');
+    Route::post('storeofficer', [OrganizationController::class, 'storeOfficer'])->name('officers.store');
+    Route::get('officers/{user}/edit', [OrganizationController::class, 'editOfficer'])->name('officers.edit');
+    Route::put('officers/{user}', [OrganizationController::class, 'updateOfficer'])->name('officers.update');
+    Route::get('officers/{user}/createSignature', [OrganizationController::class, 'createSignature'])->name('officers.createSignature');
+    Route::post('storeSignature/{user}', [OrganizationController::class, 'storeSignature'])->name('officers.storeSignature');
+    Route::get('officers/{user}/updateSignature', [OrganizationController::class, 'updateSignature'])->name('officers.updateSignature');
 
-    //chaaaart
+    //chart
     Route::get('statistics', [ChartController::class, 'index'])->name('statistics');
 
 

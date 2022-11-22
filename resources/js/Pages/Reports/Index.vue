@@ -24,6 +24,8 @@
                                     <option value="for approval-student body">For Approval-Student Body</option>
                                     <option value="for approval-dean">For Approval-deean</option>
                                     <option value="for approval-chancellor">For Approval-chancellor</option>
+                                    <option value="approved">Approved</option>
+
                                 </select>
 
                                 <a :href="'/generate-activity-report/' + status "

@@ -12,7 +12,7 @@ class Organization extends Model
 
     protected $fillable = [
         'name',
-        'department'
+        'acronym',
     ];
 
     use HasFactory;
@@ -22,8 +22,8 @@ class Organization extends Model
         return $this->hasMany(Activity::class);
     }
 
-    public function user()
+    public function users()
     {
-        return $this->hasOne(User::class);
+        return $this->belongsToMany(User::class);
     }
 }

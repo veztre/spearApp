@@ -42,7 +42,8 @@
     <ValidationErrors class="mb-4"/>
 
 
-    <div class="overflow-hidden ma-8 w-100  bg-red-200 rounded-lg border shadow-xs">
+    <div class="overflow-hidden ma-8 w-100
+                bg-red-200 rounded-lg border shadow-xs">
       <div class="overflow-x-auto  mx-8 ">
               <form @submit.prevent="submit">
                 <Label for="name" value="Venue"/>

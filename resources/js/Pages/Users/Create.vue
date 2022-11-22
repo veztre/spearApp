@@ -66,13 +66,30 @@
                   />
                   <BreezeLabel for="role" value="Role"/>
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
-                      <option selected value="">Choose...</option>
+                      <option selected value="president"> Org President</option>
+                      <option selected value="student body">Student Body</option>
                       <option value="chancellor">Chancellor</option>
                       <option value="dean">Dean </option>
-                      <option value="adviser">Adviser</option>
-                      <option value="student">Student</option>
-                      <option value="student body">Student Body</option>
                   </select>
+
+                  <div v-if="form.role=='' || form.role!='president'">
+                     <BreezeLabel for="Salutation" value="Salutation"/>
+                    <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
+                      <option selected value="Mr">Mr</option>
+                      <option selected value="Ms">Ms</option>
+                      <option value="Professor">Professor</option>
+                      <option value="Doctor">Doctor</option>
+                    </select>
+                  </div>
+                <div v-if="form.role!='chancellor'">
+                  <BreezeLabel for="department" value="Department"/>
+                  <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
+                        <option selected value="College of Architecture, Fine Arts and Design">College of Architecture, Fine Arts and Design</option>
+                        <option value="CoE College of Engineering">CoE College of Engineering</option>
+                        <option value="University-wide Organizations">University-wide Organizations</option>
+                        <option value="College of Industrial Technology">College of Industrial Technology</option>
+                    </select>
+                </div>
                   <BreezeLabel for="email" value="Email"/>
                   <BreezeInput
                       type="email"
@@ -80,24 +97,8 @@
                       class="block w-full my-5"
                       required
                   />
-                  <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
-                  <h1 class="text-3xl pb-4">Organization</h1>
-
-                  <BreezeLabel for="name" value="Name"/>
-                  <BreezeInput
-                      type="text"
-                      v-model="form.name"
-                      class="block w-full my-5"
-                  />
-                  <BreezeLabel for="department" value="Department"/>
-                  <select name="department" v-model="form.department" class="block w-full my-5 rounded-lg" >
-                      <option selected value="">Choose...</option>
-                      <option value="Engineering">Engineering</option>
-                      <option value="Business">Business</option>
-                      <option value="IT">IT</option>
-                      <option value="Nursing">Nursing</option>
-                  </select>
-                  <Button class="block  my-5">
+                    <hr class="my-8 h-px bg-gray-200 border-0 dark:bg-gray-700">
+                 <Button class="block  my-5">
                       Submit
                   </Button>
 
@@ -116,6 +117,7 @@
   import BreezeInput from '@/Components/Input.vue';
   import BreezeLabel from '@/Components/Label.vue';
   import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
+
 
 
   export default {
@@ -138,7 +140,8 @@
                 role:"",
                 name: "",
                 password:'password',
-                department:""
+                department: "",
+                salutation:"",
             }),
         };
     },

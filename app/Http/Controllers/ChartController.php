@@ -16,6 +16,7 @@ class ChartController extends Controller
             $setAxis[] = $activity->status;
             $setData[] = $activity->status_count;
         }
+        
         $activities_per_month = DB::select("SELECT DATE_FORMAT(startDate, '%M') AS Month, COUNT(startDate) num
                                             FROM activities
                                             GROUP BY DATE_FORMAT(startDate, '%M') ORDER BY 1 DESC");

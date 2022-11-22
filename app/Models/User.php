@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'department',
+        'salutation'
     ];
 
     /**
@@ -44,9 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function organization()
+    public function organizations()
     {
-        return $this->hasOne(Organization::class);
+        return $this->belongsToMany(Organization::class);
     }
 
     public function signature(){

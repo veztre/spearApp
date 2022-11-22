@@ -61,9 +61,6 @@ const props = defineProps({
     number_activities: Object,
     months: Object
 
-
-
-
 })
 
 const chartData = reactive({
