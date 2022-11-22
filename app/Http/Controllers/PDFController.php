@@ -134,10 +134,10 @@ class PDFController extends Controller
             'chancellor_lastname'=>$chancellor_lastname,
             'chancellor_role'=>$chancellor_role,
         ];
-        // $pdf = PDF::loadView('PDF/myPDF',$data);
-        // return $pdf->stream('activity.pdf');
+        $pdf = PDF::loadView('PDF/myPDF',$data);
+        return $pdf->stream('activity.pdf');
 
-        return view('PDF/myPDF',$data);
+//        return view('PDF/myPDF',$data);
     }
 
     public function activityReport(Request $request)

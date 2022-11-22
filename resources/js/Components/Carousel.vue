@@ -26,35 +26,35 @@
   <div class="carousel-inner relative w-full overflow-hidden">
     <div class="carousel-item active relative float-left w-full">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
+        :src="'/storage/images/officers.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
+        <h5 class="text-xl">Officer's Module</h5>
+        <p>Create and Update the Officer of the Organization</p>
       </div>
     </div>
     <div class="carousel-item relative float-left w-full">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
+        :src="'/storage/images/statistics.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
+        <h5 class="text-xl">Statistics Module</h5>
+        <p>View the statistics of activity by status and per month</p>
       </div>
     </div>
     <div class="carousel-item relative float-left w-full">
       <img
-        src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
+        :src="'storage/images/activity.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption hidden md:block absolute text-center">
-        <h5 class="text-xl">Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
+        <h5 class="text-xl">Activity Module</h5>
+        <p>Create and Monitor the created activity</p>
       </div>
     </div>
   </div>
@@ -79,3 +79,7 @@
 </div>
 
 </template>
+
+<script setup>
+
+</script>

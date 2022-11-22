@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::put('activity/{activity}', [ActivityController::class, 'update'])->name('activity.update');
     Route::delete('activity/{activity}', [ActivityController::class, 'destroy'])->name('activity.destroy');
     Route::get('activity/{activity}/viewAttachment', [ActivityController::class, 'viewAttachment']);
+    Route::get('activity/{activity}/viewComment', [ActivityController::class, 'viewComment']);
     Route::get('activity/{activity}/approvedByOrg', [ActivityController::class, 'approvedByOrg']);
     Route::get('activity/{activity}/approvedByDean', [ActivityController::class, 'approvedByDean']);
     Route::get('activity/{activity}/approvedByChancellor', [ActivityController::class, 'approvedByChancellor']);

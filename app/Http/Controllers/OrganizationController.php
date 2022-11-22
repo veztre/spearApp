@@ -53,7 +53,7 @@ class OrganizationController extends Controller
                       'logo' => $image_path
             ]);
         } else
-            $organization->update(Request::only('name', 'acronym'));
+        $organization->update(Request::only('name', 'acronym'));
 
         return redirect()->route('dashboard')->with('success', 'Organization  updated.');;
 

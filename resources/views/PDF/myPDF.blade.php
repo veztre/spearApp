@@ -54,8 +54,6 @@
         <div class="header">
             <div class="logo">
                 <img src="{{url('/storage/'.$logo)}}" alt="" width="100px" height="100px">
-                <!-- <img src="/images/BSU.png" alt="" width="100px" height="100px"> -->
-
             </div>
             <div style="margin-left:115px;">
                 <p style="font-size:25px;">{{$org_name}}</p>

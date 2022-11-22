@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\Activity_Signature;
+use App\Models\Comment;
 use App\Models\Organization;
 use App\Models\Organization_User;
 use App\Models\Signature;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Carbon\Carbon;
 use Illuminate\Mail\Attachment;
 use LDAP\Result;
 
@@ -33,12 +35,16 @@ class ActivityController extends Controller
             ]);
 
         }else if (Auth::user()->role=='president'){
+            if (Auth::user()->signature==null){
+                return redirect()->route('dashboard')->with('pageError', 'Create a signature before creating an activity ');;
+            }
             $organization = Auth::user()->organizations->first();
             $activities= Organization::find($organization->id)->activities()->get();
             //dd($activities);
             return Inertia::render('Activity/Index', [
                'activities' => $activities
             ]);
+
 
         } else if (Auth::user()->role == 'dean') {
             $users= User::select('id')->where([['department','=',Auth::user()->department],
@@ -174,7 +180,7 @@ class ActivityController extends Controller
             $signature = Auth::user()->signature;
 
             if ($signature==null){
-            return redirect()->route('activity.index')->with('Error', 'Please Create Signature before approving an activity ');
+               return redirect()->route('dashboard')->with('pageError', 'Please Create Signature before approving an activity ');
             }
 
             Activity::where('id', $activity->id)
@@ -194,7 +200,7 @@ class ActivityController extends Controller
                     ]
                 );
             }
-        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Dean\'s Office.');
+        return redirect()->route('dashboard')->with('success', 'Activity  Submitted to Dean\'s Office.');
 
     }
 
@@ -202,7 +208,7 @@ class ActivityController extends Controller
     {
         $signature = Auth::user()->signature;
         if ($signature == null) {
-            return redirect()->route('activity.index')->with('error', 'Please Create Signature before approving an activity ');
+            return redirect()->route('dashboard')->with('pageError', 'Please Create Signature before approving an activity ');
         }
 
         Activity::where('id', $activity->id)
@@ -222,14 +228,14 @@ class ActivityController extends Controller
                 ]
             );
         }
-        return redirect()->route('activity.index')->with('success', 'Activity  Submitted to Chancellor\'s Office.');
+        return redirect()->route('dashboard')->with('success', 'Activity  Submitted to Chancellor\'s Office.');
     }
 
     public function approvedByChancellor(Activity $activity)
     {
       $signature = Auth::user()->signature;
         if ($signature == null) {
-            return redirect()->route('activity.index')->with('error', 'Please Create Signature before approving an activity ');
+            return redirect()->route('dashboard')->with('pageError', 'Please Create Signature before approving an activity ');
         }
 
         Activity::where('id', $activity->id)
@@ -248,7 +254,7 @@ class ActivityController extends Controller
                 ]
             );
         }
-        return redirect()->route('activity.index')->with('success', 'Activity  is approved.');
+        return redirect()->route('dashboard')->with('success', 'Activity  is approved.');
     }
 
 
@@ -257,6 +263,21 @@ class ActivityController extends Controller
     {
         $activity->delete();
         return redirect()->route('activity.index')->with('success', 'Activity  Deleted.');
+    }
+
+    public function viewComment(Activity $activity){
+        $comments = $activity->comments()->get();
+        foreach($comments as $comment){
+            $user = User::where('id', $comment->user_id)->first();
+            $fullname = $user->first_name . " " . $user->last_name;
+            $comment->fullname = $fullname;
+            $comment->updated_at =
+            Carbon::createFromFormat('Y-m-d H:i:s',$comment->updated_at)
+            ->format('m/d/Y');
+        }
+        return Inertia::render('Activity/Comments', [
+            'comments' => $comments,
+        ]);
     }
 
     public function viewAttachment(Activity $activity)

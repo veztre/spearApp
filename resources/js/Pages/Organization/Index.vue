@@ -51,7 +51,7 @@
                             <tbody>
                                 <tr>
                                     <td class="px-4 py-2">
-                                        <img  :src="showImage() + organization.logo" class="object-cover h-40 w-80" />
+                                        <img  :src="showImage()+organization.logo" class="object-cover h-40 w-80" />
                                     </td>
                                     <td class="px-4 py-2">
                                           <form @submit.prevent="submit">
