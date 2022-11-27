@@ -43,6 +43,7 @@ class UserController extends Controller
                 $table->column('role', 'Role', searchable: true, sortable: true);
                 $table->column('department', 'Department', searchable: true, sortable: true);
                 $table->column(label: 'Actions');
+               
             });
 
         }
@@ -63,8 +64,6 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required',
             ]);
-
-
         if (Request::get('role')=='president'){
             $organization = new Organization([
                 'name' => "for update",
@@ -81,11 +80,7 @@ class UserController extends Controller
                 'salutation' => Request::get('salutation')
             ]);
             $user->save();
-
-           $organization->users()->attach($user);
-
-
-
+            $organization->users()->attach($user);
         }else{
             User::create([
                 'last_name' => Request::get('last_name'),
@@ -96,10 +91,7 @@ class UserController extends Controller
                 'password' => Hash::make(Request::get('password')),
                 'salutation' => Request::get('salutation')]);
         }
-
-
-
-        return redirect()->route('users.index');;
+        return redirect()->route('users.index')->with('success','User Created') ;
     }
 
     public function edit(User $user)
@@ -137,10 +129,9 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        DB::table('organizations')
-            ->where('user_id',$user->id)
-            ->delete();
-
+        // DB::table('organizations')
+        //     ->where('user_id',$user->id)
+        //     ->delete();
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User  Deleted.');
     }

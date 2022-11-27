@@ -4,6 +4,8 @@ import { Head } from '@inertiajs/inertia-vue3'
 import { Table } from "@protonemedia/inertiajs-tables-laravel-query-builder"
 import BreezeNavLink from '@/Components/NavLink.vue'
 import { Inertia } from "@inertiajs/inertia"
+import Modal from "@/Components/Modal.vue"
+
 defineProps(["users"])
 
 function destroy(id) {
@@ -15,18 +17,22 @@ function destroy(id) {
 
 <template>
 
-    <Head title="Dashboard" />
-
-
+    <Head title="User" />
     <BreezeAuthenticatedLayout>
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Users
-            </h2>
-        </template>
-
-        <div class="py-12">
-
+    <div v-show="$page.props.flash.success" class="z-50 h-5">
+      <Modal>
+            <template v-slot:title>
+                <span class="font-semibold text-white">Success</span>
+            </template>
+            <template v-slot:message>
+                <div class="px-4 py-2 mx-5">
+                    <div class="mx-3">
+                        <p class="text-lg text-gray-600">{{ $page.props.flash.success }}</p>
+                    </div>
+                </div>
+            </template>
+        </Modal>
+    </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -37,9 +43,9 @@ function destroy(id) {
                                 active:shadow-lg transition duration-150 ease-in-out" :href="route('users.create')">
                         Create User
                     </a>
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <h3 class="text-2xl text-center">Users List </h3>
-                        <Table :resource="users">
+                    <div class="bg-white border-b border-gray-200">
+                        <p class="text-2xl text-center">Users List </p>
+                        <Table :resource="users" class="p-2">
                             <template #cell(actions)="{ item: user }">
                                 <a class='inline-block bg-blue-600 text-white
                                           text-xs p-3 leading-tight uppercase rounded shadow-md
@@ -61,6 +67,6 @@ function destroy(id) {
                     </div>
                 </div>
             </div>
-        </div>
+
     </BreezeAuthenticatedLayout>
 </template>

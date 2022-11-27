@@ -51,10 +51,10 @@
                       type="text"
                   />
                  <BreezeLabel for="name" value="Purpose"/>
-                  <BreezeInput
+                  <TextareaAutoresize
+                     class="block w-full rounded-lg"
                       name="purpose"
                       v-model="form.purpose"
-                      type="text"
                   />
                   <BreezeLabel for="status" value="Status"/>
                   <select name="status" v-model="form.status" class="block w-full rounded-lg" >
@@ -112,6 +112,7 @@
   import { Inertia } from '@inertiajs/inertia'
 import ValidationErrors from '@/Components/ValidationErrors.vue';
   import SvgIcon from '@/Components/SvgIcon.vue';
+import TextareaAutoresize from '@/Components/TextareaAutoresize.vue'
 
    const props = defineProps({
       activity: Object

@@ -53,9 +53,8 @@
                       type="text"
                   />
                  <Label for="purpose" value="Purpose"/>
-                  <textarea
-                      cols="100"
-
+                  <TextareaAutoresize
+                      class="block w-full rounded-lg"
                       id="purposee"
                       v-model="form.purpose"
 
@@ -105,6 +104,7 @@
   import ValidationErrors from '@/Components/ValidationErrors.vue';
   import { Inertia } from '@inertiajs/inertia'
   import { reactive,ref } from 'vue'
+  import TextareaAutoresize from '@/Components/TextareaAutoresize.vue'
 
   const form=reactive({
       purpose: "",
