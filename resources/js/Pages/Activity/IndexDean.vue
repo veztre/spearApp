@@ -46,7 +46,8 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
-            <th class="px-4 py-3">Title</th>
+            <th class="px-4 py-3">Organization</th>
+            <th class="px-4 py-3">Purpose</th>
             <th class="px-4 py-3">Venue</th>
             <th class="px-4 py-3">Target Date</th>
             <th class="px-4 py-3">Status</th>
@@ -59,6 +60,9 @@
           <tbody class="bg-white divide-y" >
           <TableRow v-for="activity in activities" :key="activity.id">
 
+            <TableData>
+                {{ activity.acronym }}
+            </TableData>
             <TableData>
               {{ activity.purpose }}
             </TableData>
@@ -93,7 +97,7 @@
                                                 hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                                 focus:outline-none focus:ring-0 active:bg-blue-800
                                                 active:shadow-lg transition duration-150 ease-in-out">
-                    View 
+                    View
                 </a>
             </TableData>
             <TableData>

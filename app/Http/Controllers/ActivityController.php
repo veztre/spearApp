@@ -57,12 +57,18 @@ class ActivityController extends Controller
             $organizations = Organization_User::select('organization_id')->whereIn('user_id',$users)->get();
             $activities = Activity::whereIn('organization_id',$organizations)
                             ->where('status','for approval-dean')->get();
+             foreach ($activities as $activity){
+                $activity->acronym = $activity->organization->acronym;
+            }
             return Inertia::render('Activity/IndexDean', [
                 'activities' => $activities,
             ]);
 
         }else{
             $activities = Activity::where("status", "for approval-chancellor")->get();
+             foreach ($activities as $activity){
+                $activity->acronym = $activity->organization->acronym;
+            }
             //$forUpdates = $activities->where('status', 'for update')->count();
             return Inertia::render('Activity/IndexChancellor', [
                 'activities' => $activities,

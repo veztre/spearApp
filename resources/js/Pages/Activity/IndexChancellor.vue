@@ -44,6 +44,7 @@
                         <thead>
                             <tr
                                 class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+                                <th class="px-4 py-3">Organization</th>
                                 <th class="px-4 py-3">Purpose</th>
                                 <th class="px-4 py-3">Venue</th>
                                 <th class="px-4 py-3">Start</th>
@@ -56,6 +57,9 @@
                         <tbody class="bg-white divide-y">
                             <TableRow v-for="activity in activities" :key="activity.id">
 
+                                <TableData>
+                                {{ activity.acronym }}
+                                </TableData>
                                 <TableData>
                                     {{ activity.purpose }}
                                 </TableData>
