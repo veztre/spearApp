@@ -24,12 +24,17 @@ class ActivityController extends Controller
     public function index()
     {
 
-       //$activities=Activity::latest('id')->paginate(3);
-       //$activities=Activity::all();
+
 
 
         if (Auth::user()->role=='student organization'){
-            $activities = Activity::where("status", "for approval-student Body")->get();
+            $activities = Activity::where("status", "for approval - office of the student organization")->get();
+            foreach ($activities as $activity){
+                $activity->acronym = $activity->organization->acronym;
+            }
+
+
+
              return Inertia::render('Activity/IndexStudentOrg',[
             'activities' => $activities
             ]);
@@ -136,7 +141,7 @@ class ActivityController extends Controller
 
         $org_officers = Organization::find($organization->id)->users()->get();
 
-        if (Request::get('status')=='for approval-student body'){
+        if (Request::get('status')=='for approval - office of the student organization'){
             if ($signature == null) {
                 return redirect()->route('activity.index')->with('error', 'Please Create Signature before approving an activity ');
             }

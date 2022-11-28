@@ -125,6 +125,18 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'user  updated');;
     }
 
+     public function reset(User $user)
+    {
+
+
+        $user->password = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'; // password
+        $user->update();
+        return redirect()->route('users.index')->with('success', 'password has been reset');
+    }
+
+
+
+
 
     public function destroy(User $user)
     {

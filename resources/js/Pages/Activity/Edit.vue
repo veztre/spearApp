@@ -48,6 +48,7 @@
                   <BreezeInput
                       name="venue"
                       v-model="form.venue"
+
                       type="text"
                   />
                  <BreezeLabel for="name" value="Purpose"/>
@@ -60,20 +61,21 @@
                   <select name="status" v-model="form.status" class="block w-full rounded-lg" >
                     <option :value='form.status'>{{form.status}} </option>
                     <option value="new">New</option>
-                    <option value="for approval-student body">For Approval - Student Body</option>
+                    <option value="for approval - office of the student organization">for approval - office of the student organization</option>
                   </select>
                   <BreezeLabel for="startDate "  value="Start Date"/>
                   <BreezeInput
                       type="datetime-local"
                       v-model="form.startDate"
-                      required
+
+
                   />
 
                   <BreezeLabel for="endDate "  value="End Date"/>
                   <BreezeInput
                       type="datetime-local"
                       v-model="form.endDate"
-                      required
+
                   />
                   <BreezeInput type="file" @input="form.attachment = $event.target.files[0]" />
                     <progress v-if="form.progress" :value="form.progress.percentage" max="100">
@@ -123,7 +125,6 @@ import TextareaAutoresize from '@/Components/TextareaAutoresize.vue'
             id:props.activity.id,
             purpose: props.activity.purpose,
             venue: props.activity.venue,
-            priority: props.activity.priority,
             endDate: props.activity.endDate,
             startDate: props.activity.startDate,
             status: props.activity.status,

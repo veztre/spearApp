@@ -51,6 +51,7 @@
         <table class="w-full whitespace-no-wrap">
           <thead>
           <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+            <th class="px-4 py-3">Organization</th>
             <th class="px-4 py-3">Purpose</th>
             <th class="px-4 py-3">Venue</th>
             <th class="px-4 py-3">Target Date</th>
@@ -64,7 +65,10 @@
           <TableRow v-for="activity in activities" :key="activity.id">
 
             <TableData>
-              {{ activity.purpose }}
+              {{ activity.acronym }}
+            </TableData>
+            <TableData>
+                {{ activity.purpose }}
             </TableData>
             <TableData >
               {{ activity.venue }}
