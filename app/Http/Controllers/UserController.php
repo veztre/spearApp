@@ -32,7 +32,7 @@ class UserController extends Controller
             $users = QueryBuilder::for(User::class)
             ->defaultSort('first_name')
             ->allowedSorts(['first_name', 'last_name','role','department'])
-            ->allowedFilters(['lastname_name','last_name', 'role','department', $globalSearch])
+            ->allowedFilters(['last_name','first_name', 'role','department', $globalSearch])
             ->paginate()
             ->withQueryString();
 
