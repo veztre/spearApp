@@ -28,12 +28,13 @@
 
 
         <div class="flex  flex-row  space-x-4">
-            <div class="">
-                <img class="max-w-full h-auto rounded-lg" src="/images/spear.png" />
+            <div>
+ 
+                <img class="max-w-sm h-auto transition-shadow ease-in-out duration-300 shadow-none hover:shadow-xl" src="/images/login.png" />
             </div>
             <div class="py-2">
                 <h1 class="text-2xl text-red-400 "> Spear Application </h1>
-                
+
             </div>
         </div>
     </BreezeAuthenticatedLayout>
