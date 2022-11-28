@@ -33,8 +33,7 @@ class UserController extends Controller
             ->defaultSort('first_name')
             ->allowedSorts(['first_name', 'last_name','role','department'])
             ->allowedFilters(['lastname_name','last_name', 'role','department', $globalSearch])
-
-            ->paginate(8)
+            ->paginate()
             ->withQueryString();
 
             return Inertia::render('Users/Index', ['users' => $users])->table(function (InertiaTable $table) {
@@ -43,7 +42,7 @@ class UserController extends Controller
                 $table->column('role', 'Role', searchable: true, sortable: true);
                 $table->column('department', 'Department', searchable: true, sortable: true);
                 $table->column(label: 'Actions');
-               
+
             });
 
         }

@@ -43,12 +43,12 @@
       <div class="overflow-x-auto w-full">
         <table class="w-full whitespace-no-wrap">
           <thead>
-          <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
-            <th class="px-4 py-3">Purpose</th>
+          <tr class="text-xs font-bold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
+            <th class="px-4 py-3">Title</th>
             <th class="px-4 py-3">Venue</th>
-            <th class="px-4 py-3">Start</th>
-            <th class="px-4 py-3">End</th>
+            <th class="px-4 py-3">Target Date</th>
             <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">View</th>
             <th class="px-4 py-3">Action</th>
           </tr>
           </thead>
@@ -62,11 +62,9 @@
               {{ activity.venue }}
             </TableData>
             <TableData >
-              {{ activity.startDate }}
+              {{ moment(activity.startDate).format("MM/DD/YYYY")  }} - {{ moment(activity.endDate).format("MM/DD/YYYY") }}
             </TableData>
-            <TableData >
-              {{ activity.endDate }}
-            </TableData>
+
             <TableData>
             <div v-if="`${activity.status}`=='for update'" class="text-red-600">
               {{ activity.status }}
@@ -75,6 +73,15 @@
                 {{ activity.status }}
             </div>
             </TableData>
+            <TableData>
+                <a :href="`/activity/${activity.id}/PDF`" target="_blank" class="px-2 py-2 inline-block bg-blue-600 text-white
+                                                    text-xs leading-tight uppercase rounded shadow-md
+                                                    hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
+                                                    focus:outline-none focus:ring-0 active:bg-blue-800
+                                                    active:shadow-lg transition duration-150 ease-in-out">
+                    Request
+                </a>
+            </TableData>
             <TableData >
                <Link v-if="`${activity.status}` == 'for update' || `${activity.status}` == 'new' "  :href="`/activity/${activity.id}/edit`"
                                 class="mr-2 px-2 py-2 inline-block bg-blue-600 text-white
@@ -82,7 +89,7 @@
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                     focus:outline-none focus:ring-0 active:bg-blue-800
                                     active:shadow-lg transition duration-150 ease-in-out">
-                    Edit
+                    Update
                 </Link>
                 <Link v-if="`${activity.status}` == 'for update'" :href="`/activity/${activity.id}/viewComment`"
                                 class="mr-2 p-2 inline-block bg-blue-600 text-white
@@ -92,14 +99,7 @@
                                     active:shadow-lg transition duration-150 ease-in-out">
                 View Comment
                 </Link>
-                <a :href="`/activity/${activity.id}/PDF`" target="_blank"
-                                class="px-2 py-2 inline-block bg-blue-600 text-white
-                                      text-xs leading-tight uppercase rounded shadow-md
-                                      hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-                                      focus:outline-none focus:ring-0 active:bg-blue-800
-                                      active:shadow-lg transition duration-150 ease-in-out">
-                   View
-                </a>
+
             </TableData>
           </TableRow>
           </tbody>
@@ -121,7 +121,7 @@
   import Button from '@/Components/SubmitButton.vue';
   import TableRow from '../../Components/TableRow.vue'
   import TableData from '@/Components/TableData.vue';
-
+  import moment from "moment";
 
 const props = defineProps({
     activities: Object

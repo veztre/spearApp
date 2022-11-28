@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('salutation',50)->nullable();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('middle_name')->nullable();
             $table->string('role');
             $table->string('department', 50)->nullable();
             $table->string('email')->unique();

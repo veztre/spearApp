@@ -53,9 +53,10 @@
           <tr class="text-xs font-semibold TableRowacking-wide text-left text-gray-500 uppercase bg-gray-50 border-b">
             <th class="px-4 py-3">Purpose</th>
             <th class="px-4 py-3">Venue</th>
-            <th class="px-4 py-3">Start</th>
-            <th class="px-4 py-3">End</th>
+            <th class="px-4 py-3">Target Date</th>
             <th class="px-4 py-3">Status</th>
+            <th class="px-4 py-3">View</th>
+            <th class="px-4 py-3">Attachment</th>
             <th class="px-4 py-3">Action</th>
           </tr>
           </thead>
@@ -69,17 +70,11 @@
               {{ activity.venue }}
             </TableData>
             <TableData >
-              {{ activity.startDate }}
-            </TableData>
-            <TableData >
-              {{ activity.endDate }}
+            {{ moment(activity.startDate).format("MM/DD/YYYY") }} - {{ moment(activity.endDate).format("MM/DD/YYYY") }}
             </TableData>
             <TableData>
-            <div v-if="`${activity.status}`=='for update'" class="text-red-600">
+            <div>
               {{ activity.status }}
-            </div>
-            <div v-else>
-                {{ activity.status }}
             </div>
             </TableData>
             <TableData >
@@ -88,16 +83,19 @@
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                     focus:outline-none focus:ring-0 active:bg-blue-800
                                     active:shadow-lg transition duration-150 ease-in-out">
-                 View
+                 Request
                 </a>
-
+            </TableData>
+            <TableData>
                 <a :href="`/activity/${activity.id}/viewAttachment`"   class="p-2 m-2 inline-block bg-blue-600 text-white
                                     text-xs leading-tight uppercase rounded shadow-md
                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
                                     focus:outline-none focus:ring-0 active:bg-blue-800
                                     active:shadow-lg transition duration-150 ease-in-out">
-                 View Attachment
+                 Attachment
                 </a>
+            </TableData>
+            <TableData>
                 <a :href="`/activity/${activity.id}/addComment`"  class="px-2 py-2 inline-block bg-blue-600 text-white
                                                     text-xs leading-tight uppercase rounded shadow-md
                                                     hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
@@ -121,43 +119,28 @@
       </div>
       <div
         class="px-4 py-3 text-xs font-semibold TableRowacking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
-      
+
       </div>
     </div>
   </div>
   </BreezeAuthenticatedLayout>
 </template>
 
-<script>
-  import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-  import Pagination from '@/Components/Pagination.vue';
-  import { Head, Link } from '@inertiajs/inertia-vue3';
-  import Button from '@/Components/SubmitButton.vue';
-  import BreezeNavLink from '@/Components/NavLink.vue'
-  import TableRow from '../../Components/TableRow.vue'
-  import TableData from '@/Components/TableData.vue';
-
-  export default {
-    components: {
-    BreezeAuthenticatedLayout,
-    Pagination,
-    Head,
-    BreezeNavLink,
-    Button,
-    TableRow,
-    TableData,
-    Link
-},
-
-    props: {
-        activities: Object,
-        forUpdates: Object
-
-    },
-    methods: {
-
-    }
+<script setup>
+import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
+import Pagination from '@/Components/Pagination.vue';
+import { Head, Link } from '@inertiajs/inertia-vue3';
+import Button from '@/Components/SubmitButton.vue';
+import BreezeNavLink from '@/Components/NavLink.vue'
+import TableRow from '../../Components/TableRow.vue'
+import TableData from '@/Components/TableData.vue';
+import moment from "moment";
 
 
-  }
-  </script>
+ const props=defineProps ({
+      activities: Object,
+
+ })
+
+
+</script>

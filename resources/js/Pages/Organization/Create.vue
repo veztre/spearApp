@@ -73,8 +73,8 @@
                     <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
                       <option selected value="Mr">Mr</option>
                       <option selected value="Ms">Ms</option>
-                      <option value="Professor">Professor</option>
-                      <option value="Doctor">Doctor</option>
+                      <option value="Prof">Prof</option>
+                      <option value="Dr">Dr</option>
                     </select>
                   </div>
                   <BreezeLabel for="email" value="Email"/>

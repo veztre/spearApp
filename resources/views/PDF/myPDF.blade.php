@@ -55,9 +55,9 @@
             <div class="logo">
                 <img src="{{url('/storage/'.$logo)}}" alt="" width="100px" height="100px">
             </div>
-            <div style="margin-left:115px;">
-                <p style="font-size:25px;">{{$org_name}}</p>
-                <p style="font-size:15px;">Department: {{$department}}</p>
+            <div style="margin-left:15px;">
+                <p style="font-size:25px;">{{$org_name}} ({{$acronym}})</p>
+
             </div>
         </div>
         <hr />
@@ -70,12 +70,11 @@
         <br>
         The {{$org_name}} would like to request the use of the venue {{$venue}}
         for the purpose of {{$purpose}}
-        <br>
         from {{date_format(new DateTime($startDate),"F d Y g:i:s A")}} to {{date_format(new DateTime($endDate),"F d Y g:i:s A")}}
         <br> <br>
-        We, Promise that the event will be held based on youe the existing process of the University
+        We, Promise that the event will be held based on youe the existing process of the University.
         <br> <br>
-        Hoping for the favorable Response on the Matter
+        Hoping for the favorable Response on the Matter.
         <br> <br>
         <table>
             <tr>
@@ -96,7 +95,7 @@
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$owner_firstname}} {{$owner_lastname}}</td>
-                <td style="padding-left:150px">{{$stud_body_firstname}} {{$stud_body_lastname}}</td>
+                <td style="padding-left:150px">{{$stud_body_salutation}} {{$stud_body_firstname}} {{$stud_body_lastname}}</td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$role}}</td>
@@ -125,8 +124,8 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-right:150px">{{$adviser_firstname}} {{$adviser_lastname}}</td>
-                <td style="padding-left:150px">{{$chairperson_firstname}} {{$chairperson_lastname}}</td>
+                <td style="padding-right:150px">{{$adviser_salutation}} {{$adviser_firstname}} {{$adviser_lastname}}</td>
+                <td style="padding-left:150px">{{$chairperson_salutation}} {{$chairperson_firstname}} {{$chairperson_lastname}}</td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$adviser_role}}</td>
@@ -151,7 +150,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-right:150px">{{$dean_firstname}} {{$dean_lastname}}</td>
+                <td style="padding-right:150px">{{$dean_salutation}} {{$dean_firstname}} {{$dean_lastname}}</td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$dean_role}}</td>
@@ -170,7 +169,7 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-right:150px">{{$chancellor_firstname}} {{$chancellor_lastname}}</td>
+                <td style="padding-right:150px">{{$chancellor_salutation}} {{$chancellor_firstname}} {{$chancellor_lastname}}</td>
             </tr>
             <tr>
                 <td style="padding-right:150px">{{$chancellor_role}}</td>

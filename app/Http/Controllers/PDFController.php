@@ -23,26 +23,31 @@ class PDFController extends Controller
         $adviser_firstname = "";
         $adviser_lastname = "";
         $adviser_role = "Position";
+        $adviser_salutation = "";
         //for chairperson owner
         $sign_chairperson = "";
         $chairperson_firstname = "";
         $chairperson_lastname = "";
         $chairperson_role = "Position";
+        $chairperson_salutation = "";
         //for student leader
         $sign_stud_body = "";
         $stud_body_firstname = "";
         $stud_body_lastname = "";
-        $stud_body_role = "Student Org Leader";
+        $stud_body_role = "Office of the Student Org";
+        $stud_body_salutation = "";
         //for dean
         $dean_sign = "";
         $dean_firstname = "";
         $dean_lastname = "";
         $dean_role = "Dean";
+        $dean_salutation = "";
         //for chancellor
         $chancellor_sign = "";
         $chancellor_firstname = "";
         $chancellor_lastname = "";
         $chancellor_role = "Chancellor";
+        $chancellor_salutation = "";
 
         $organization =$activity->organization;
 
@@ -56,39 +61,45 @@ class PDFController extends Controller
                 $sign_owner= $signature->sign_image;
                 $owner_firstname = $user->first_name;
                 $owner_lastname = $user->last_name;
-                $owner_role = ucfirst($user->role);
+                $owner_role = ucfirst($organization->acronym .' Org President');
 
             }
             if ($user->role == 'adviser') {
                 $sign_adviser = $signature->sign_image;
                 $adviser_firstname = $user->first_name;
                 $adviser_lastname = $user->last_name;
-                $adviser_role = ucfirst($user->role);
+                $adviser_role = ucfirst($organization->acronym . ' ' .$user->role);
+                $adviser_salutation = ucfirst($user->salutation);
+
             }
             if ($user->role == 'chairperson') {
                 $sign_chairperson = $signature->sign_image;
                 $chairperson_firstname = $user->first_name;
                 $chairperson_lastname = $user->last_name;
                 $chairperson_role = ucfirst($user->role);
+                $chairperson_salutation = ucfirst($user->salutation);
             }
 
-            if ($user->role == 'student body') {
+            if ($user->role == 'student organization') {
                 $sign_stud_body = $signature->sign_image;
                 $stud_body_firstname = $user->first_name;
                 $stud_body_lastname = $user->last_name;
-                $stud_body_role = ucfirst($user->role);
+                $stud_body_role = ucfirst('Office of the Student Org');
+                $stud_body_salutation = ucfirst($user->salutation);
             }
             if ($user->role == 'dean') {
                 $dean_sign = $signature->sign_image;
                 $dean_firstname = $user->first_name;
                 $dean_lastname = $user->last_name;
                 $dean_role = ucfirst($user->role);
+                $dean_salutation = ucfirst($user->salutation);
             }
-            if ($user->role == 'admin') {
+            if ($user->role == 'chancellor') {
                 $chancellor_sign = $signature->sign_image;
                 $chancellor_firstname = $user->first_name;
                 $chancellor_lastname = $user->last_name;
                 $chancellor_role = ucfirst($user->role);
+                $chancellor_salutation = ucfirst($user->salutation);
             }
 
 
@@ -102,6 +113,7 @@ class PDFController extends Controller
            'endDate' => $activity->endDate,
            'org_name' =>$organization->name,
            'logo'=>$organization->logo,
+           'acronym'=>$organization->acronym,
           'department' => $organization->department,
            //for owner
            'sign_owner'=> $sign_owner,
@@ -113,26 +125,31 @@ class PDFController extends Controller
             'adviser_firstname' => $adviser_firstname,
             'adviser_lastname' => $adviser_lastname,
             'adviser_role' => $adviser_role,
+            'adviser_salutation' => $adviser_salutation,
             //for chairperson
             'sign_chairperson' => $sign_chairperson,
             'chairperson_firstname' => $chairperson_firstname,
             'chairperson_lastname' => $chairperson_lastname,
             'chairperson_role' => $chairperson_role,
+            'chairperson_salutation' => $chairperson_salutation,
            //for student body
            'sign_stud_body' => $sign_stud_body,
            'stud_body_firstname' => $stud_body_firstname,
            'stud_body_lastname' => $stud_body_lastname,
            'stud_body_role' => $stud_body_role,
+            'stud_body_salutation' => $stud_body_salutation,
             //for dean
             'dean_sign'=>$dean_sign,
             'dean_firstname'=>$dean_firstname,
             'dean_lastname'=>$dean_lastname,
             'dean_role'=>$dean_role,
+            'dean_salutation'=>$dean_salutation,
             //for chancellor
             'chancellor_sign'=>$chancellor_sign,
             'chancellor_firstname'=>$chancellor_firstname,
             'chancellor_lastname'=>$chancellor_lastname,
             'chancellor_role'=>$chancellor_role,
+            'chancellor_salutation' => $chancellor_salutation,
         ];
         $pdf = PDF::loadView('PDF/myPDF',$data);
         return $pdf->stream('activity.pdf');
@@ -165,7 +182,7 @@ class PDFController extends Controller
             }
             $activities = $data->toArray();
             $pdf = PDF::loadView('PDF/activity', ['activities' => $activities,'status'=>$status,'organization'=>$organizations]);
-            return $pdf->download('activity.pdf');
+            return $pdf->stream('activity.pdf');
             // return view('PDF/activity', ['activities' => $activities, 'status' => $status, 'organization' => $organizations]);
 
 

@@ -2,7 +2,7 @@
   <Head title="Create User"/>
 
   <BreezeAuthenticatedLayout>
-  
+
   <div class="p-4 bg-white rounded-lg shadow-xs">
     <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md">
       <div class="flex justify-center items-center w-12 bg-blue-500">
@@ -42,7 +42,7 @@
                   <BreezeLabel for="role" value="Role"/>
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
                       <option selected value="president"> Org President</option>
-                      <option selected value="student body">Student Body</option>
+                      <option selected value="student organization">Student Organization</option>
                       <option value="chancellor">Chancellor</option>
                       <option value="dean">Dean </option>
                   </select>
@@ -52,8 +52,8 @@
                     <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
                       <option selected value="Mr">Mr</option>
                       <option selected value="Ms">Ms</option>
-                      <option value="Professor">Professor</option>
-                      <option value="Doctor">Doctor</option>
+                      <option value="Prof">Prof</option>
+                      <option value="Dr">Dr</option>
                     </select>
                   </div>
                 <div v-if="form.role!='chancellor'">
@@ -63,6 +63,7 @@
                         <option value="CoE College of Engineering">CoE College of Engineering</option>
                         <option value="University-wide Organizations">University-wide Organizations</option>
                         <option value="College of Industrial Technology">College of Industrial Technology</option>
+                        <option value="College of Informatics and Computing Science">College of Informatics and Computing Science</option>
                     </select>
                 </div>
                   <BreezeLabel for="email" value="Email"/>

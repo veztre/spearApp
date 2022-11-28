@@ -17,7 +17,7 @@
           </BreezeNavLink>
         </li>
 
-        <li v-if="($page.props.auth.user.role).toLowerCase()=='admin'" class="relative px-6 py-3">
+        <li v-if="($page.props.auth.user.role).toLowerCase()=='student organization'" class="relative px-6 py-3">
           <BreezeNavLink :href="route('users.index')" :active="route().current('users.index')">
             <template #icon>
               <SvgIcon>
@@ -40,24 +40,7 @@
                 Organization
             </BreezeNavLink>
         </li>
-        <li v-if="($page.props.auth.user.role).toLowerCase()=='president'" class="relative px-6 py-3">
-            <BreezeNavLink :href="route('users.officers')" :active="route().current('users.officers')">
-                <template #icon>
-                   <SvgIcon>
-                     <path stroke-linecap="round" stroke-linejoin="round"
-                       d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94
-                          3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112
-                          21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12
-                          0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995
-                          5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986
-                          0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3
-                          3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5
-                          0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                   </SvgIcon>
-                  </template>
-                Officers
-            </BreezeNavLink>
-        </li>
+
         <li class="relative px-6 py-3">
           <BreezeNavLink :href="route('activity.index')" :active="route().current('activity.index')">
             <template #icon>
@@ -70,17 +53,7 @@
           Activities
           </BreezeNavLink>
         </li>
-        <li v-if="($page.props.auth.user.role).toLowerCase() !='president'" class="relative px-6 py-3">
-            <BreezeNavLink :href="route('signature.index')" :active="route().current('signature.index')">
-                <template #icon>
-                    <SvgIcon>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
-                    </SvgIcon>
-                </template>
-                Signature
-            </BreezeNavLink>
-        </li>
+
         <li class="relative px-6 py-3">
             <BreezeNavLink :href="route('report.index')" :active="route().current('report.index')">
                 <template #icon>

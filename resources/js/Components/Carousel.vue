@@ -26,36 +26,27 @@
   <div class="carousel-inner relative w-full overflow-hidden">
     <div class="carousel-item active relative float-left w-full">
       <img
-        :src="'/storage/images/officers.png'"
+        :src="'/storage/images/carousel1.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
-        <h5 class="text-xl">Officer's Module</h5>
-        <p>Create and Update the Officer of the Organization</p>
-      </div>
+
     </div>
     <div class="carousel-item relative float-left w-full">
       <img
-        :src="'/storage/images/statistics.png'"
+        :src="'/storage/images/carousel2.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
-        <h5 class="text-xl">Statistics Module</h5>
-        <p>View the statistics of activity by status and per month</p>
-      </div>
+
     </div>
     <div class="carousel-item relative float-left w-full">
       <img
-        :src="'storage/images/activity.png'"
+        :src="'storage/images/carousel3.png'"
         class="block w-full"
         alt="..."
       />
-      <div class="carousel-caption text-red-500 hidden md:block absolute text-center">
-        <h5 class="text-xl">Activity Module</h5>
-        <p>Create and Monitor the created activity</p>
-      </div>
+      
     </div>
   </div>
   <button

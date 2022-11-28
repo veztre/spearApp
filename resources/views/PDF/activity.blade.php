@@ -56,6 +56,9 @@
             @if (!isset($organization))
             <div class="logo">
                 <img src="{{url('/images/BSU.png')}}" alt="" width="100px" height="100px" />
+             </div>
+                <div class="top-left">
+                <h2>Batangas State University (Alangilan Campus) </h2>
             </div>
             @else
             <div class="logo">
@@ -90,11 +93,11 @@
         <tbody>
             @foreach ($activities as $activity)
             <tr>
-                <td style="padding-right:15px">{{$activity['venue']}}</td>
-                <td style="padding-right:15px">{{$activity['purpose']}}</td>
-                <td style="padding-right:15px">{{$activity['startDate']}}</td>
-                <td style="padding-right:15px">{{$activity['endDate']}}</td>
-                <td style="padding-right:15px">{{$activity['status']}}</td>
+                <td >{{$activity['venue']}}</td>
+                <td >{{$activity['purpose']}}</td>
+                <td >{{date('d-M-Y', strtotime($activity['startDate']))}}</td>
+                <td >{{date('d-M-Y', strtotime($activity['endDate']))}}</td>
+                <td >{{$activity['status']}}</td>
             </tr>
             @endforeach
         </tbody>

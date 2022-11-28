@@ -34,7 +34,7 @@
 
     <div class="flex justify-center">
         <div class="block rounded-lg shadow-lg bg-white w-3/4 text-center">
-            <div class="py-3 px-6 border-b border-gray-300">
+            <div class="py-3 px-6 font-bold text-2xl border-b border-gray-300">
                 System Features
             </div>
             <div class="p-6">

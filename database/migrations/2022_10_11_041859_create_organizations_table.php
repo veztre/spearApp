@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('name',150);
             $table->string('logo', 200)->nullable();
             $table->string('acronym',15);
+            $table->string('department', 50)->nullable();
+            $table->string('college', 150)->nullable();;
+            $table->string('email')->unique()->nullable();;
             $table->timestamps();
         });
     }

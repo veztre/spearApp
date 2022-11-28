@@ -28,7 +28,7 @@ class ActivityController extends Controller
        //$activities=Activity::all();
 
 
-        if (Auth::user()->role=='student body'){
+        if (Auth::user()->role=='student organization'){
             $activities = Activity::where("status", "for approval-student Body")->get();
              return Inertia::render('Activity/IndexStudentOrg',[
             'activities' => $activities

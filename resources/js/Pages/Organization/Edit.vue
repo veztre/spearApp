@@ -65,6 +65,7 @@
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
                     <option :value='form.role'>{{form.role}} </option>
                     <option selected value="president"> Org President</option>
+                    <option selected value="student body">Student Organization</option>
                     <option value="chancellor">Chancellor</option>
                     <option value="dean">Dean </option>
                   </select>
@@ -72,10 +73,10 @@
                      <BreezeLabel for="Salutation" value="Salutation"/>
                     <select name="salutation" v-model="form.salutation" class="block w-full my-5 rounded-lg" >
                        <option :value='form.salutation'>{{form.salutation}} </option>
-                      <option selected value="Mr">Mr</option>
-                      <option selected value="Ms">Ms</option>
-                      <option value="Professor">Professor</option>
-                      <option value="Doctor">Doctor</option>
+                      <option selected value="Mr.">Mr</option>
+                      <option selected value="Ms.">Ms</option>
+                      <option value="Prof.">Prof</option>
+                      <option value="Dr.">Dr</option>
                     </select>
                  </div>
                   <BreezeLabel for="email" value="Email"/>
