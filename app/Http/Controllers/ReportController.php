@@ -33,13 +33,12 @@ class ReportController extends Controller
         //dd($query);
         $activities = QueryBuilder::for($query)
             ->defaultSort('id')
-            ->allowedSorts(['purpose', 'venue', 'start_date','status'])
+            ->allowedSorts(['purpose', 'venue', 'start_date','endDate','status'])
             ->allowedFilters(['venue', 'purpose', 'startDate', 'endDate','status', $globalSearch])
             ->paginate(8)
             ->withQueryString();
 
         return Inertia::render('Reports/Index', ['activities' => $activities])->table(function (InertiaTable $table) {
-            $table->column('id', 'ID', searchable: true, sortable: true);
             $table->column('venue', 'Venue', searchable: true, sortable: true);
             $table->column('purpose', 'Purpose', searchable: true, sortable: true);
             $table->column('status', 'Status', searchable: true, sortable: true);
