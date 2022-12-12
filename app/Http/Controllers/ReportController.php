@@ -29,21 +29,25 @@ class ReportController extends Controller
             });
         });
 
-        $query= Activity::select('id','venue', DB::raw("SUBSTR(purpose,1,30) AS purpose"), 'startDate', 'endDate','status');
-        //dd($query);
+        $query= Activity::join('organizations','activities.organization_id','=','organizations.id')
+                  ->select('acronym','venue', DB::raw("SUBSTR(purpose,1,30) AS purpose"),
+                          DB::RAW("CONCAT(DATE_FORMAT(startDate,'%m/%d/%Y'),'-',DATE_FORMAT(endDate,'%m/%d/%Y')) AS targetDate"),
+                          'status');
+        // dd($queries);
+
         $activities = QueryBuilder::for($query)
-            ->defaultSort('id')
-            ->allowedSorts(['purpose', 'venue', 'start_date','endDate','status'])
-            ->allowedFilters(['venue', 'purpose', 'startDate', 'endDate','status', $globalSearch])
-            ->paginate(8)
+            ->defaultSort('acronym')
+            ->allowedSorts(['acronym','purpose', 'venue', 'targetDate','status'])
+            ->allowedFilters(['acronym','venue', 'purpose', 'targetDate','status', $globalSearch])
+            ->paginate()
             ->withQueryString();
 
         return Inertia::render('Reports/Index', ['activities' => $activities])->table(function (InertiaTable $table) {
+            $table->column('acronym', 'Organization', searchable: true, sortable: true);
+            $table->column('purpose', 'Title', searchable: true, sortable: true);
             $table->column('venue', 'Venue', searchable: true, sortable: true);
-            $table->column('purpose', 'Purpose', searchable: true, sortable: true);
+            $table->column('targetDate', 'Target Date', searchable: true, sortable: true);
             $table->column('status', 'Status', searchable: true, sortable: true);
-            $table->column('startDate', 'Start Date', searchable: true, sortable: true);
-            $table->column('endDate', 'End Date', searchable: true, sortable: false);
         });
     }
 

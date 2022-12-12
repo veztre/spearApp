@@ -49,7 +49,14 @@
                 <div class="overflow-x-auto  mx-8 ">
                     <form @submit.prevent="submit">
                         <Label for="name" value="Venue" />
-                        <Input id="name" v-model="form.venue" type="text" />
+                        <select name="venue" v-model="form.venue" class="block w-full rounded-lg">
+                            <option value="Amphitheater - CEAFA Building 4th floor">Amphitheater - CEAFA Building 4th floor</option>
+                            <option value="AVP Room - CIT Building Ground Floor">AVP Room - CIT Building Ground Floor</option>
+                            <option value="Gymnasium - BatStateU Alangilan Campus">Gymnasium - BatStateU Alangilan Campus</option>
+                            <option value="Virtual or Online Event">Virtual or Online Event</option>
+                        </select>
+
+
                         <Label for="purpose" value="Purpose" />
                         <TextareaAutoresize class="block w-full rounded-lg" id="purposee" v-model="form.purpose" />
                         <Label for="status" value="Status" />

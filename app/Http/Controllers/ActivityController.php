@@ -33,8 +33,6 @@ class ActivityController extends Controller
                 $activity->acronym = $activity->organization->acronym;
             }
 
-
-
              return Inertia::render('Activity/IndexStudentOrg',[
             'activities' => $activities
             ]);

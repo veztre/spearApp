@@ -45,12 +45,14 @@
       <div class="overflow-x-auto  mx-8 ">
               <form @submit.prevent="update">
                 <BreezeLabel for="name" value="Venue"/>
-                  <BreezeInput
-                      name="venue"
-                      v-model="form.venue"
-
-                      type="text"
-                  />
+                <Label for="name" value="Venue" />
+                <select name="venue" v-model="form.venue" class="block w-full rounded-lg">
+                    <option :value='form.venue'>{{form.venue}} </option>
+                    <option value="Amphitheater - CEAFA Building 4th floor">Amphitheater - CEAFA Building 4th floor</option>
+                    <option value="AVP Room - CIT Building Ground Floor">AVP Room - CIT Building Ground Floor</option>
+                    <option value="Gymnasium - BatStateU Alangilan Campus">Gymnasium - BatStateU Alangilan Campus</option>
+                    <option value="Virtual or Online Event">Virtual or Online Event</option>
+                </select>
                  <BreezeLabel for="name" value="Purpose"/>
                   <TextareaAutoresize
                      class="block w-full rounded-lg"
