@@ -24,9 +24,6 @@ class ActivityController extends Controller
     public function index()
     {
 
-
-
-
         if (Auth::user()->role=='student organization'){
             $activities = Activity::where("status", "for approval - office of the student organization")->get();
             foreach ($activities as $activity){
@@ -34,18 +31,17 @@ class ActivityController extends Controller
             }
 
              return Inertia::render('Activity/IndexStudentOrg',[
-            'activities' => $activities
+            'activities' => $activities,'totalActivity'=>count($activities)
             ]);
 
         }else if (Auth::user()->role=='president'){
             if (Auth::user()->signature==null){
-                return redirect()->route('dashboard')->with('pageError', 'Create a signature before creating an activity ');;
+                return redirect()->route('dashboard')->with(['pageError'=>'Create a signature before creating an activity ','totalActivity'=> '9']);
             }
             $organization = Auth::user()->organizations->first();
             $activities= Organization::find($organization->id)->activities()->get();
-            //dd($activities);
             return Inertia::render('Activity/Index', [
-               'activities' => $activities
+               'activities' => $activities,'totalActivity'=>count($activities)
             ]);
 
 
@@ -59,7 +55,7 @@ class ActivityController extends Controller
                 $activity->acronym = $activity->organization->acronym;
             }
             return Inertia::render('Activity/IndexDean', [
-                'activities' => $activities,
+                'activities' => $activities,'totalActivity'=>count($activities)
             ]);
 
         }else{
@@ -69,7 +65,7 @@ class ActivityController extends Controller
             }
             //$forUpdates = $activities->where('status', 'for update')->count();
             return Inertia::render('Activity/IndexChancellor', [
-                'activities' => $activities,
+                'activities' => $activities,'totalActivity'=>count($activities)
             ]);
         }
     }
@@ -97,6 +93,14 @@ class ActivityController extends Controller
         // create pdf attachment
         $image_path = Request::file('attachment') ? Request::file('attachment')->store('public') : null;
 
+        if (Request::get('venue') != 'Virtual or Online Event') {
+            $checkConflict = Activity::where('venue', Request::get('venue'))
+                ->whereBetween('startDate', [Request::get('startDate'), Request::get('endDate')])->get();
+            if (count($checkConflict) > 0) {
+                return redirect()->route('activity.index')->with(['pageError' => 'There is a conflict with the schedule and venue']);
+            }
+        }
+
 
         DB::table('activities')->insert([
             'organization_id' => $organization->id,
@@ -109,7 +113,7 @@ class ActivityController extends Controller
             'updated_at'=> date("Y-m-d H:i:s"),
         ]);
 
-        return redirect()->route('activity.index')->with('success', 'Activity  created.');
+        return redirect()->route('activity.index')->with(['success'=> 'Activity  created.']);
     }
 
     public function edit(Activity $activity)

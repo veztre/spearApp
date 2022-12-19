@@ -10,22 +10,44 @@
 
   <div class="p-4 bg-white rounded-lg shadow-xs">
     <div v-show="$page.props.flash.success"
-         class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
-      <div class="flex items-center justify-center w-12 bg-green-500">
-        <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-          <path
-              d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z">
-          </path>
-        </svg>
-      </div>
+         class="z-50">
+        <Modal>
+            <template v-slot:title>
+                <p class="text-lg text-white">Success</p>
+            </template>
+            <template v-slot:message>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+                    class="inline-block w-8 h-8 text-green-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
 
-      <div class="px-4 py-2 -mx-3">
-        <div class="mx-3">
-          <span class="font-semibold text-green-500">Success</span>
-          <p class="text-sm text-gray-600">{{ $page.props.flash.success }}</p>
-        </div>
-      </div>
+
+                <span class="py-1 px-1 leading-none whitespace-nowrap text-lg
+                                                        font-bold  text-green-500 rounded ml-2"> {{ $page.props.flash.success }} </span>
+            </template>
+        </Modal>
     </div>
+
+    <div v-show="$page.props.flash.pageError" class="z-50">
+        <Modal>
+            <template v-slot:title>
+                <p class="text-lg text-white">Confict of Schedule </p>
+            </template>
+            <template v-slot:message>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"
+                    class="inline-block w-8 h-8 text-red-500">
+                    <path s troke-linecap="round" stroke-linejoin="round"
+                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                </svg>
+
+                <span class="py-1 px-1 leading-none whitespace-nowrap text-lg
+                                                font-bold  text-red-500 rounded ml-2"> {{ $page.props.flash.pageError }} </span>
+            </template>
+        </Modal>
+    </div>
+
+
+
     <div class="inline-flex overflow-hidden mb-4 w-full bg-white rounded-lg shadow-md">
       <div class="px-4 py-4 -mx-3">
         <div class="mx-3">
@@ -122,7 +144,7 @@
   import TableRow from '../../Components/TableRow.vue'
   import TableData from '@/Components/TableData.vue';
   import moment from "moment";
-
+   import Modal from '@/Components/Modal.vue'
 const props = defineProps({
     activities: Object
    })

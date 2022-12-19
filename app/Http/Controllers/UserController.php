@@ -29,14 +29,20 @@ class UserController extends Controller
                     });
                 });
             });
-            $users = QueryBuilder::for(User::class)
-            ->defaultSort('first_name')
-            ->allowedSorts(['first_name', 'last_name','role','department'])
+
+            $query= User::leftjoin('organization_user','users.id','=','organization_user.user_id')
+                  ->leftjoin('organizations','organizations.id','=','organization_user.organization_id')
+                  ->select('acronym','last_name','first_name','role','users.department');
+
+            $users = QueryBuilder::for($query)
+            ->defaultSort('-acronym')
+            ->allowedSorts(['acronym','first_name', 'last_name','role','department'])
             ->allowedFilters(['last_name','first_name', 'role','department', $globalSearch])
             ->paginate()
             ->withQueryString();
 
             return Inertia::render('Users/Index', ['users' => $users])->table(function (InertiaTable $table) {
+                $table->column('acronym', 'Acronym', searchable: true, sortable: true);
                 $table->column('first_name', 'First Name', searchable: true, sortable: true);
                 $table->column('last_name', 'Last Name', searchable: true, sortable: true);
                 $table->column('role', 'Role', searchable: true, sortable: true);

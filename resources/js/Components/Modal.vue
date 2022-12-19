@@ -1,15 +1,16 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container">
         <div class="flex justify-center">
        <div v-show="isOpen" class="
           absolute
           inset-0
           flex
+
           items-center
           justify-center
           bg-gray-700 bg-opacity-50
         ">
-                <div class="bg-white rounded-md shadow-xl">
+                <div class="bg-white w-1/3 rounded-md shadow-xl">
                     <div class="p-2  bg-blue-700 flex items-center justify-between">
                         <p class="text-lg"> <slot name="title"/> </p>
                         <svg @click="isOpen = false" xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +21,7 @@
                         </svg>
                     </div>
                     <div class="mt-4">
-                         <p class="mb-4 text-sm">
+                         <p class="m-5 items-center">
                             <slot name="message"/>
                         </p>
                     </div>

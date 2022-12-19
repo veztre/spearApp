@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                 ];
             },
             'showingMobileMenu' => false,
+            'totalActivity' => $request->session()->get('totalActivity')
         ]);
     }
 }

@@ -10,8 +10,29 @@
     <h3 class="text-lg mx-10 px-10 font-large leading-6 text-white "><i class="fa-solid fa-cart-shopping"></i> SPEAR: Student Organization's Portal for Event Approval and
     Registry </h3>
 
-
-        <BreezeDropdown>
+    <div v-if="$page.props.totalActivity > 0">
+        <a :href="route('activity.index')">
+                <span class="py-1 px-1 leading-none text-center whitespace-nowrap
+                    align-baseline font-bold bg-blue-600 rounded-full text-white m-7">
+                    {{$page.props.totalActivity}}
+                </span>
+               <svg   class="w-7 h-7" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                viewBox="0 0 24 24" stroke="white">
+                <path
+                    d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5">
+                </path>
+               </svg>
+        </a>
+    </div>
+    <div v-else class="mx-7">
+        <svg class="w-7 h-7" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            viewBox="0 0 24 24" stroke="white">
+            <path
+                d="M9.143 17.082a24.248 24.248 0 003.844.148m-3.844-.148a23.856 23.856 0 01-5.455-1.31 8.964 8.964 0 002.3-5.542m3.155 6.852a3 3 0 005.667 1.97m1.965-2.277L21 21m-4.225-4.225a23.81 23.81 0 003.536-1.003A8.967 8.967 0 0118 9.75V9A6 6 0 006.53 6.53m10.245 10.245L6.53 6.53M3 3l3.53 3.53">
+            </path>
+        </svg>
+    </div>
+        <Dropdown>
 
           <template #trigger>
             <button class="align-middle rounded-full text-white focus:shadow-outline-purple focus:outline-none" aria-label="Account" aria-haspopup="true">
@@ -22,7 +43,7 @@
           <template #content>
             <DropdownLink :href="route('profile.show')">
               <template #icon>
-                <svg class="mr-3 w-4 h-4" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="mr-3 w-4 h4" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                   <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                 </svg>
@@ -62,15 +83,14 @@
               </template>
             </DropdownLink>
           </template>
-        </BreezeDropdown>
+        </Dropdown>
 
       </div>
     </header>
 </template>
 
 <script setup>
-import BreezeDropdown from '@/Components/Dropdown.vue'
-//import BreezeDropdownLink from '@/Components/DropdownLink.vue'
+import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from "../Components/DropdownLink.vue";
 
 </script>

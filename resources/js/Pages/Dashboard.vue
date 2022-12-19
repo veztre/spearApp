@@ -4,14 +4,21 @@
         <div v-show="$props.default_password" class="z-50">
             <Modal>
                 <template v-slot:title>
-                    <p class="text-lg text-white">Change Password </p>
+                    <p class="text-lg text-white">Default Password </p>
                 </template>
                 <template v-slot:message>
-                    <p class="m-2"> Please Change your password </p>
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        class="inline-block w-6 h-6 text-orange-500">
+                        <path s troke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                    </svg>
+
+                    <span class="py-1 px-1 leading-none text-center whitespace-nowrap
+                                        font-bold  text-orange-500 rounded ml-2"> Please Change Your Password </span>
                 </template>
             </Modal>
         </div>
-       <div v-show="$page.props.flash.pageError" class="z-40">
+       <div v-show="$page.props.flash.pageError" class="z-50">
            <Modal>
                 <template v-slot:title>
                     <p class="text-lg text-red-800">Error</p>
@@ -21,12 +28,13 @@
                 </template>
             </Modal>
         </div>
-        <div v-show="$page.props.flash.success" class="inline-flex w-full mb-4 overflow-hidden bg-white rounded-lg shadow-md">
+        <div v-show="$page.props.flash.success" class="z-50">
             <Modal>
                 <template v-slot:title>
                     <p class="text-lg text-white">Success</p>
                 </template>
                 <template v-slot:message>
+
                     <p class="m-2">{{ $page.props.flash.success }}</p>
                 </template>
             </Modal>
@@ -57,5 +65,5 @@
 
     import 'tw-elements';
 
- defineProps(['default_password'])
+     defineProps(['default_password'])
 </script>,

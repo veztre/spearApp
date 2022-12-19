@@ -72,6 +72,7 @@ function destroy(id) {
                                     :href="`/users/${user.id}/reset`">
                                     Reset
                                 </a>
+                                
                             </template>
                         </Table>
                     </div>

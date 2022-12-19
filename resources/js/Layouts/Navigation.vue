@@ -1,8 +1,8 @@
 <template>
-  <aside class="z-20 hidden w-40 overflow-y-auto bg-gray-400 h-screen md:block flex-shrink-0">
-    <div class="py-4 text-gray-500">
+  <aside class="z-20 hidden w-48 overflow-y-auto bg-gray-400 h-screen md:block flex-shrink-0">
+    <div class="py-5  text-gray-500">
       <Link class="" :href="route('dashboard')">
-        <img  class=" w-full" :src="'/storage/logos/BSU.png'" />
+        <img  class="w-full" :src="'/storage/logos/BSU.png'" />
       </Link>
       <ul class="mt-6 text-white text-bold ">
         <li class="relative px-6 py-3">
@@ -50,8 +50,11 @@
               </SvgIcon>
 
             </template>
-          Activities
+        Activities
+        <span class="inline-block py-1 px-1 leading-none text-center whitespace-nowrap
+                    font-bold bg-red-600 text-white rounded ml-2">{{$page.props.totalActivity}}</span>
           </BreezeNavLink>
+
         </li>
 
         <li class="relative px-6 py-3">
@@ -107,7 +110,8 @@
     import BreezeNavLink from '@/Components/NavLink.vue'
     import { Link } from '@inertiajs/inertia-vue3';
     import SvgIcon from '@/Components/SvgIcon.vue';
-import { ref } from 'vue'
+    import { ref } from 'vue'
+
 function showLogo() {
     return "storage/logos/"
 }
