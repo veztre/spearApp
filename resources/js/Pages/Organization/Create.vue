@@ -63,7 +63,6 @@
                   <BreezeLabel for="role" value="Role"/>
                   <select name="role" v-model="form.role" class="block w-full my-5 rounded-lg" >
                       <option selected value="president"> Org President</option>
-                    <option selected value="officer">Officer</option>
                       <option value="adviser">Adviser</option>
                       <option value="chairperson">Chairperson</option>
                   </select>

@@ -9,7 +9,7 @@ import Modal from "@/Components/Modal.vue"
 defineProps(["users"])
 
 function destroy(id) {
-    if (confirm('Are you sure you want to delete this activity?')) {
+    if (confirm('Are you sure you want to delete this user?')) {
         Inertia.delete(route("users.destroy", id));
     }
 }
@@ -72,7 +72,7 @@ function destroy(id) {
                                     :href="`/users/${user.id}/reset`">
                                     Reset
                                 </a>
-                                
+
                             </template>
                         </Table>
                     </div>

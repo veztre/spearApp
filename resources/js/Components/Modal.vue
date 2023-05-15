@@ -25,6 +25,14 @@
                             <slot name="message"/>
                         </p>
                     </div>
+
+                    <div class="mt-4">
+                        <p class="m-5 items-center">
+                            <slot name="button" />
+                        </p>
+                    </div>
+
+
                 </div>
             </div>
         </div>

@@ -36,12 +36,12 @@ Route::get('/dashboard',[DashboardController::class, 'index'])
 
 
 Route::middleware('auth')->group(function () {
+
     Route::get('about', function () {
         return Inertia::render('About');
-    })->name('about');
+        })->name('about');
+
     //  user
-
-
     Route::get('users', [UserController::class, 'index'])->name('users.index');
     Route::get('createuser', [UserController::class, 'create'])->name('users.create');
     Route::post('registeruser', [UserController::class, 'store'])->name('users.store');
@@ -67,7 +67,9 @@ Route::middleware('auth')->group(function () {
     Route::get('activity/{activity}/viewComment', [ActivityController::class, 'viewComment']);
     Route::get('activity/{activity}/approvedByOrg', [ActivityController::class, 'approvedByOrg']);
     Route::get('activity/{activity}/approvedByDean', [ActivityController::class, 'approvedByDean']);
+
     Route::get('activity/{activity}/approvedByChancellor', [ActivityController::class, 'approvedByChancellor']);
+    Route::get('schedule', [ActivityController::class, 'schedule'])->name('schedule');
 
 
     //PDF

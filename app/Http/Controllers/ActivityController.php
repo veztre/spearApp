@@ -298,6 +298,20 @@ class ActivityController extends Controller
         return  Storage::download($activity->attachment);
     }
 
+    public function schedule()
+    {
+        $activities = Activity::orderBy('startDate')->get();
+        return Inertia::render('Activity/Schedule', [
+            'activities'=> $activities
+
+        ]);
+    }
+
+
+
+
+
+
 
 
 }

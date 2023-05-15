@@ -25,9 +25,7 @@ class OrganizationController extends Controller
     public function index()
     {
         $organization= Auth::user()->organizations->first();
-        return Inertia::render('Organization/Index',[
-            'organization' => $organization
-        ]);
+        return Inertia::render('Organization/Index',['organization' => $organization]);
     }
 
     /**

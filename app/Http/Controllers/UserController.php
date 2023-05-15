@@ -32,7 +32,7 @@ class UserController extends Controller
 
             $query= User::leftjoin('organization_user','users.id','=','organization_user.user_id')
                   ->leftjoin('organizations','organizations.id','=','organization_user.organization_id')
-                  ->select('acronym','last_name','first_name','role','users.department');
+                  ->select('acronym','last_name','first_name','role','users.department','users.id');
 
             $users = QueryBuilder::for($query)
             ->defaultSort('-acronym')
